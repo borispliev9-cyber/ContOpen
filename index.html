@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#0b0f1c">
+    <meta name="theme-color" content="#1a1008">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>🚗 Контейнеры с тачками</title>
+    <title>🚗 Car Containers</title>
     <style>
         * {
             box-sizing: border-box;
@@ -26,8 +26,6 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
-            background: #0b0f1c;
-            background-image: linear-gradient(145deg, #0b0f1c 0%, #1a1f2f 100%);
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
@@ -36,41 +34,207 @@
             color: white;
             padding: env(safe-area-inset-top) 8px calc(8px + env(safe-area-inset-bottom));
             overflow-x: hidden;
-            will-change: transform;
+            position: relative;
+            background-color: #1a1008;
+            background-image:
+                radial-gradient(circle at 90px 70px, #ffd966 5px, #8a6a15 7px, transparent 9px),
+                radial-gradient(circle at 270px 70px, #ffd966 5px, #8a6a15 7px, transparent 9px),
+                radial-gradient(circle at 90px 210px, #ffd966 5px, #8a6a15 7px, transparent 9px),
+                radial-gradient(circle at 270px 210px, #ffd966 5px, #8a6a15 7px, transparent 9px),
+                radial-gradient(circle at 30px 10px, #6b7280 3px, transparent 5px),
+                radial-gradient(circle at 330px 10px, #6b7280 3px, transparent 5px),
+                radial-gradient(circle at 30px 270px, #6b7280 3px, transparent 5px),
+                radial-gradient(circle at 330px 270px, #6b7280 3px, transparent 5px),
+                linear-gradient(180deg, #6b7280 0%, #4a5568 100%),
+                linear-gradient(180deg, #6b7280 0%, #4a5568 100%),
+                repeating-linear-gradient(0deg, transparent 0px, transparent 140px, rgba(0, 0, 0, 0.6) 140px, rgba(0, 0, 0, 0.85) 145px, rgba(0, 0, 0, 0.6) 150px, transparent 150px),
+                repeating-linear-gradient(90deg, transparent 0px, transparent 180px, rgba(0, 0, 0, 0.6) 180px, rgba(0, 0, 0, 0.85) 185px, rgba(0, 0, 0, 0.6) 190px, transparent 190px),
+                repeating-linear-gradient(90deg, #3a2818 0px, #4a3420 40px, #3a2818 80px, #4a3420 120px, #3a2818 160px, #4a3420 180px),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.7) 100%);
+            background-size:
+                360px 280px, 360px 280px, 360px 280px, 360px 280px,
+                360px 280px, 360px 280px, 360px 280px, 360px 280px,
+                12px 30px, 12px 30px,
+                auto, auto, auto, auto;
+            background-position:
+                0 0, 0 0, 0 0, 0 0,
+                0 0, 0 0, 0 0, 0 0,
+                calc(50% - 180px) calc(50% - 140px), calc(50% + 168px) calc(50% - 140px),
+                0 0, 0 0, 0 0, 0 0;
+            background-repeat:
+                repeat, repeat, repeat, repeat,
+                repeat, repeat, repeat, repeat,
+                repeat, repeat,
+                repeat, repeat, repeat, no-repeat;
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(255, 200, 80, 0.18), transparent 55%),
+                radial-gradient(ellipse at 0% 100%, rgba(80, 150, 255, 0.08), transparent 50%),
+                radial-gradient(ellipse at 100% 100%, rgba(255, 100, 100, 0.08), transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.8) 100%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .game {
             max-width: 480px;
             width: 100%;
-            background: rgba(20, 25, 40, 0.8);
+            background: rgba(15, 18, 28, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border-radius: 32px;
             padding: 16px 14px 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), inset 0 1px 2px rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.25);
             transform: translateZ(0);
+            position: relative;
+            z-index: 2;
         }
 
-        .balance {
-            background: #0f121f;
-            border-radius: 100px;
-            padding: 10px 20px;
-            text-align: center;
-            font-size: clamp(1.5rem, 6vw, 2rem);
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: #7ae0a0;
-            text-shadow: 0 0 15px rgba(122, 224, 160, 0.6);
-            box-shadow: inset 0 0 15px #00000066, 0 5px 0 #0b0e15;
-            border-bottom: 2px solid #2f354a;
-            margin-bottom: 10px;
+        .header {
+            background: rgba(15, 18, 31, 0.9);
+            border-radius: 20px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            border: 1px solid #2c3248;
+            box-shadow: inset 0 0 15px #00000066;
             min-height: 56px;
         }
 
-        .balance span { font-size: 0.8em; }
+        .player-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .player-name {
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+            font-weight: 800;
+            color: #ffd966;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .player-name .edit-icon {
+            font-size: 0.7em;
+            opacity: 0.5;
+        }
+
+        .player-balance {
+            font-size: clamp(1rem, 4.5vw, 1.3rem);
+            font-weight: 800;
+            color: #7ae0a0;
+            text-shadow: 0 0 10px rgba(122, 224, 160, 0.5);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .icon-btn {
+            background: #1e2338;
+            border: 1px solid #3b425b;
+            border-radius: 12px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.05s, background 0.15s;
+            touch-action: manipulation;
+            position: relative;
+        }
+
+        .icon-btn:active {
+            transform: scale(0.92);
+            background: #252b44;
+        }
+
+        .icon-btn .boost-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #7ae0a0;
+            color: #0b0e17;
+            font-size: 0.6rem;
+            font-weight: 800;
+            border-radius: 100px;
+            padding: 1px 5px;
+            min-width: 16px;
+            text-align: center;
+            box-shadow: 0 0 8px #7ae0a0;
+        }
+
+        .active-boosts {
+            display: none;
+            gap: 6px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .active-boosts.show {
+            display: flex;
+        }
+
+        .boost-chip {
+            background: linear-gradient(90deg, #2a2310, #1e2338);
+            border: 1px solid #ffd966;
+            border-radius: 100px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: clamp(0.65rem, 2.8vw, 0.75rem);
+            font-weight: 800;
+            color: #ffd966;
+            animation: chipPulse 2s infinite alternate;
+            min-width: 0;
+        }
+
+        @keyframes chipPulse {
+            from { box-shadow: 0 0 5px #ffd96644; }
+            to { box-shadow: 0 0 15px #ffd96688; }
+        }
+
+        .boost-chip .chip-icon { font-size: 1.1em; }
+
+        .boost-chip .chip-time {
+            background: #ffd966;
+            color: #0b0e17;
+            padding: 1px 6px;
+            border-radius: 100px;
+            font-size: 0.9em;
+            font-variant-numeric: tabular-nums;
+        }
 
         .info-row {
             display: flex;
@@ -79,7 +243,7 @@
         }
 
         .info-badge {
-            background: #0f121f;
+            background: rgba(15, 18, 31, 0.9);
             border-radius: 100px;
             padding: 8px 12px;
             font-size: clamp(0.7rem, 3vw, 0.8rem);
@@ -121,6 +285,12 @@
             transform: translateZ(0);
             will-change: transform;
             position: relative;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .tap-area.boosted {
+            box-shadow: 0 12px 0 #0a0c12, 0 0 0 4px #ffd966, 0 0 30px #ffd966aa, 0 20px 30px black;
+            border-color: #ffd966;
         }
 
         .tap-area.pressed {
@@ -128,10 +298,38 @@
             box-shadow: 0 6px 0 #0a0c12, 0 0 0 4px #7ae0a0, 0 20px 30px black;
         }
 
+        .tap-area.boosted.pressed {
+            box-shadow: 0 6px 0 #0a0c12, 0 0 0 4px #ffd966, 0 0 30px #ffd966aa, 0 20px 30px black;
+        }
+
         .tap-emoji {
             font-size: clamp(3.5rem, 15vw, 5rem);
             filter: drop-shadow(0 8px 8px black);
             pointer-events: none;
+        }
+
+        .tap-multiplier {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: linear-gradient(135deg, #ffd966, #ff6b9d);
+            color: #0b0e17;
+            font-weight: 900;
+            font-size: clamp(0.8rem, 3.5vw, 1rem);
+            padding: 4px 10px;
+            border-radius: 100px;
+            box-shadow: 0 0 15px #ffd966;
+            animation: multPulse 0.8s infinite alternate;
+            display: none;
+        }
+
+        .tap-multiplier.show {
+            display: block;
+        }
+
+        @keyframes multPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.15); }
         }
 
         .containers {
@@ -241,7 +439,7 @@
         }
 
         .log {
-            background: #0b0e17;
+            background: rgba(11, 14, 23, 0.9);
             border-radius: 20px;
             padding: 10px 14px;
             margin-top: 10px;
@@ -291,6 +489,8 @@
         .log-item.mythic .name { color: #ffd966; }
         .log-item.achievement { background: linear-gradient(90deg, #2a2310, transparent); }
         .log-item.achievement .name { color: #ffd966; font-weight: 800; }
+        .log-item.boost { background: linear-gradient(90deg, #1a3a1a, transparent); }
+        .log-item.boost .name { color: #7ae0a0; font-weight: 800; }
 
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(-8px); }
@@ -300,7 +500,9 @@
         .modal {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -340,7 +542,6 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        /* ===== ДЖЕКПОТ-АНИМАЦИЯ ===== */
         .modal-card.jackpot {
             border: 3px solid #ffd966;
             background: linear-gradient(145deg, #3a2f10, #1b1408);
@@ -359,7 +560,6 @@
             100% { transform: scale(1) rotate(0deg); }
         }
 
-        /* Лучи за карточкой джекпота */
         .jackpot-rays {
             position: absolute;
             top: 50%;
@@ -442,7 +642,6 @@
             to { transform: translateY(-15px) scale(1.1); }
         }
 
-        /* Конфетти */
         .confetti-piece {
             position: fixed;
             width: 10px;
@@ -458,7 +657,6 @@
             100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
 
-        /* Вспышка при джекпоте */
         .jackpot-flash {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -597,7 +795,9 @@
         }
 
         .garage-modal .modal-card,
-        .ach-modal .modal-card {
+        .ach-modal .modal-card,
+        .settings-modal .modal-card,
+        .shop-modal .modal-card {
             max-width: 440px;
             padding: 18px 14px;
             max-height: 88vh;
@@ -614,7 +814,8 @@
         }
 
         .garage-total,
-        .ach-progress {
+        .ach-progress,
+        .shop-balance {
             text-align: center;
             font-size: clamp(0.75rem, 3vw, 0.85rem);
             color: #a0a8c0;
@@ -622,7 +823,8 @@
         }
 
         .garage-total b,
-        .ach-progress b { color: #7ae0a0; }
+        .ach-progress b,
+        .shop-balance b { color: #7ae0a0; }
 
         .garage-list,
         .ach-list {
@@ -639,11 +841,155 @@
         }
 
         .garage-list::-webkit-scrollbar,
-        .ach-list::-webkit-scrollbar { width: 3px; }
+        .ach-list::-webkit-scrollbar,
+        .shop-list::-webkit-scrollbar { width: 3px; }
         .garage-list::-webkit-scrollbar-track,
-        .ach-list::-webkit-scrollbar-track { background: #1e2338; }
+        .ach-list::-webkit-scrollbar-track,
+        .shop-list::-webkit-scrollbar-track { background: #1e2338; }
         .garage-list::-webkit-scrollbar-thumb,
-        .ach-list::-webkit-scrollbar-thumb { background: #ffd966; border-radius: 10px; }
+        .ach-list::-webkit-scrollbar-thumb,
+        .shop-list::-webkit-scrollbar-thumb { background: #ffd966; border-radius: 10px; }
+
+        .shop-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-right: 4px;
+            max-height: 420px;
+            -webkit-overflow-scrolling: touch;
+            contain: content;
+        }
+
+        .shop-item {
+            background: #0f121f;
+            border-radius: 18px;
+            padding: 12px 14px;
+            border: 1px solid #2c3248;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.05s, border-color 0.15s;
+        }
+
+        .shop-item.active-boost {
+            border-color: #7ae0a0;
+            background: linear-gradient(90deg, #1a3a1a, #0f121f);
+            box-shadow: 0 0 15px #7ae0a033;
+        }
+
+        .shop-item-icon {
+            font-size: 2rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1e2338;
+            border-radius: 14px;
+            flex-shrink: 0;
+        }
+
+        .shop-item.active-boost .shop-item-icon {
+            background: linear-gradient(135deg, #2a4a2a, #1e2338);
+            animation: iconGlow 1.5s infinite alternate;
+        }
+
+        @keyframes iconGlow {
+            from { box-shadow: 0 0 8px #7ae0a066; }
+            to { box-shadow: 0 0 20px #7ae0a0aa; }
+        }
+
+        .shop-item-info {
+            flex: 1;
+            text-align: left;
+            min-width: 0;
+        }
+
+        .shop-item-name {
+            font-weight: 800;
+            font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+            color: white;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .shop-item-desc {
+            font-size: clamp(0.68rem, 2.8vw, 0.75rem);
+            color: #a0a8c0;
+            line-height: 1.3;
+        }
+
+        .shop-item-duration {
+            font-size: clamp(0.65rem, 2.5vw, 0.7rem);
+            color: #7ae0a0;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        .shop-item-price {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .shop-price-tag {
+            font-weight: 800;
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+            color: #ffd966;
+            white-space: nowrap;
+        }
+
+        .shop-price-tag.cant-afford {
+            color: #ff4d6d;
+            opacity: 0.7;
+        }
+
+        .shop-buy-btn {
+            background: #7ae0a0;
+            color: #0b0e17;
+            border: none;
+            border-radius: 12px;
+            padding: 8px 14px;
+            font-weight: 800;
+            font-size: clamp(0.7rem, 3vw, 0.8rem);
+            cursor: pointer;
+            transition: transform 0.05s, background 0.15s;
+            box-shadow: 0 3px 0 #4a9c6a;
+            touch-action: manipulation;
+            white-space: nowrap;
+            min-width: 80px;
+        }
+
+        .shop-buy-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #4a9c6a;
+        }
+
+        .shop-buy-btn.disabled {
+            background: #4a5568;
+            color: #a0a8c0;
+            box-shadow: 0 3px 0 #2a3147;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .shop-buy-btn.plus-btn {
+            background: #4dabff;
+            box-shadow: 0 3px 0 #2a7bc8;
+            min-width: 60px;
+        }
+
+        .shop-buy-btn.plus-btn:active {
+            box-shadow: 0 1px 0 #2a7bc8;
+        }
 
         .garage-item {
             display: flex;
@@ -841,6 +1187,131 @@
             opacity: 1;
         }
 
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
+            text-align: left;
+        }
+
+        .settings-item {
+            background: #0f121f;
+            border-radius: 14px;
+            padding: 12px 14px;
+            border: 1px solid #2c3248;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .settings-label {
+            font-size: clamp(0.75rem, 3vw, 0.85rem);
+            font-weight: 700;
+            color: #a0a8c0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .settings-input {
+            background: #0b0e17;
+            border: 1px solid #3b425b;
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: white;
+            font-size: clamp(0.9rem, 3.5vw, 1rem);
+            font-weight: 700;
+            outline: none;
+            width: 100%;
+            font-family: inherit;
+            transition: border-color 0.15s;
+        }
+
+        .settings-input:focus {
+            border-color: #ffd966;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            flex: 1;
+            background: #1e2338;
+            border: 2px solid #3b425b;
+            border-radius: 12px;
+            padding: 12px;
+            color: #a0a8c0;
+            font-weight: 800;
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+            cursor: pointer;
+            transition: 0.15s;
+            touch-action: manipulation;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(90deg, #2a2310, #3a2f10);
+            border-color: #ffd966;
+            color: #ffd966;
+            box-shadow: 0 0 12px #ffd96633;
+        }
+
+        .lang-btn:active {
+            transform: scale(0.97);
+        }
+
+        .settings-btn {
+            border: none;
+            border-radius: 50px;
+            padding: 14px;
+            font-weight: 800;
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+            cursor: pointer;
+            transition: transform 0.05s;
+            touch-action: manipulation;
+            min-height: 48px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .settings-btn.save {
+            background: #7ae0a0;
+            color: #0b0e17;
+            box-shadow: 0 5px 0 #4a9c6a;
+        }
+
+        .settings-btn.save:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #4a9c6a;
+        }
+
+        .settings-btn.reset {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 5px 0 #b33d66;
+            margin-top: 6px;
+        }
+
+        .settings-btn.reset:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #b33d66;
+        }
+
+        .settings-hint {
+            font-size: clamp(0.65rem, 2.6vw, 0.72rem);
+            color: #7b85a0;
+            text-align: center;
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
         .toast {
             position: fixed;
             top: calc(12px + env(safe-area-inset-top));
@@ -906,6 +1377,12 @@
             will-change: transform, opacity;
         }
 
+        .floating-money.boosted {
+            color: #ffd966;
+            text-shadow: 0 0 15px #ffd966;
+            font-size: clamp(1.4rem, 5.5vw, 1.8rem);
+        }
+
         @keyframes floatUp {
             0% { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
             100% { opacity: 0; transform: translate(-50%, -50%) translateY(-50px); }
@@ -915,7 +1392,7 @@
             position: fixed;
             bottom: calc(8px + env(safe-area-inset-bottom));
             right: 12px;
-            background: rgba(15, 18, 31, 0.9);
+            background: rgba(15, 18, 31, 0.95);
             border: 1px solid #7ae0a0;
             color: #7ae0a0;
             font-size: 0.7rem;
@@ -935,7 +1412,6 @@
         @media (max-height: 700px) {
             .tap-area { max-width: 180px; margin: 4px auto 12px; }
             .tap-emoji { font-size: clamp(3rem, 12vw, 4rem); }
-            .balance { padding: 8px 18px; min-height: 50px; }
             .container-btn { padding: 10px 4px; min-height: 80px; }
             .log { height: 68px; }
         }
@@ -944,7 +1420,6 @@
             .tap-area { max-width: 140px; margin: 2px auto 8px; }
             .tap-emoji { font-size: clamp(2.5rem, 10vw, 3.2rem); }
             .info-row { margin-bottom: 8px; }
-            .balance { padding: 6px 16px; min-height: 44px; font-size: 1.4rem; }
             .container-btn { padding: 8px 4px; min-height: 72px; gap: 1px; }
             .log { height: 60px; padding: 8px 12px; }
         }
@@ -953,7 +1428,11 @@
             .jackpot-rays,
             .jackpot-banner,
             .jackpot-emoji,
-            .jackpot-star {
+            .jackpot-star,
+            .container-btn.mythic,
+            .boost-chip,
+            .tap-multiplier,
+            .shop-item.active-boost .shop-item-icon {
                 animation: none !important;
             }
             .modal-card.jackpot {
@@ -965,63 +1444,89 @@
             .tap-area { max-width: 120px; }
             .tap-emoji { font-size: 3rem; }
         }
+
+        @media (max-width: 400px) {
+            .game {
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
+        }
     </style>
 </head>
 <body>
 <div class="game" id="game">
-    <div class="balance">
-        <span>💵</span> <span id="balanceDisplay">0</span> <span style="font-size:0.6em; color:#a0a8c0;">$</span>
+    <div class="header">
+        <div class="player-info">
+            <div class="player-name" id="playerNameDisplay">
+                <span id="playerNameText">Игрок</span>
+                <span class="edit-icon">✏️</span>
+            </div>
+            <div class="player-balance">
+                <span id="balanceDisplay">0</span> <span style="font-size:0.7em; color:#a0a8c0;">$</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="icon-btn" id="shopBtn" title="Магазин">
+                🛒
+                <span class="boost-badge" id="boostBadge" style="display:none;">0</span>
+            </button>
+            <button class="icon-btn" id="settingsBtn" title="Настройки">⚙️</button>
+        </div>
     </div>
 
+    <!-- Панель активных бустов -->
+    <div class="active-boosts" id="activeBoostsPanel"></div>
+
     <div class="info-row">
-        <div class="info-badge">👆 Тап: <b>+1 $</b></div>
-        <div class="info-badge" id="achBtn">🏅 <b id="achCounter">0/10</b></div>
+        <div class="info-badge">👆 <span data-i18n="tap">Тап</span>: <b id="tapValueDisplay">+1 $</b></div>
+        <div class="info-badge" id="achBtn">🏅 <b id="achCounter">0/12</b></div>
     </div>
 
     <div class="tap-area" id="tapArea">
         <div class="tap-emoji">👆</div>
+        <div class="tap-multiplier" id="tapMultiplier">x2</div>
     </div>
 
     <div class="containers">
         <button class="container-btn common" id="commonBtn" data-type="common">
-            <div class="title">Обычный</div>
+            <div class="title" data-i18n="container_common">Обычный</div>
             <div class="price">💵 500</div>
-            <div class="car-count">8 авто</div>
+            <div class="car-count">15 <span data-i18n="cars">авто</span></div>
             <div class="jackpot">🎰 BMW</div>
         </button>
         <button class="container-btn rare" id="rareBtn" data-type="rare">
-            <div class="title">Редкий</div>
-            <div class="price">💵 5 000</div>
-            <div class="car-count">8 авто</div>
+            <div class="title" data-i18n="container_rare">Редкий</div>
+            <div class="price">💵 15 000</div>
+            <div class="car-count">15 <span data-i18n="cars">авто</span></div>
             <div class="jackpot">🎰 Porsche</div>
         </button>
         <button class="container-btn epic" id="epicBtn" data-type="epic">
-            <div class="title">Эпический</div>
+            <div class="title" data-i18n="container_epic">Эпический</div>
             <div class="price">💵 50 000</div>
-            <div class="car-count">8 авто</div>
+            <div class="car-count">15 <span data-i18n="cars">авто</span></div>
             <div class="jackpot">🎰 Ferrari</div>
         </button>
         <button class="container-btn legendary" id="legendaryBtn" data-type="legendary">
-            <div class="title">Легендарный</div>
+            <div class="title" data-i18n="container_legendary">Легендарный</div>
             <div class="price">💵 500 000</div>
-            <div class="car-count">8 авто</div>
+            <div class="car-count">15 <span data-i18n="cars">авто</span></div>
             <div class="jackpot">🎰 Bugatti</div>
         </button>
         <button class="container-btn mythic" id="mythicBtn" data-type="mythic">
-            <div class="title">✦ Мифический ✦</div>
+            <div class="title">✦ <span data-i18n="container_mythic">Мифический</span> ✦</div>
             <div class="price">💵 5 000 000</div>
-            <div class="car-count">8 авто</div>
+            <div class="car-count">15 <span data-i18n="cars">авто</span></div>
             <div class="jackpot">👑 KOENIGSEGG</div>
         </button>
     </div>
 
     <button class="garage-btn" id="garageBtn">
-        <span>🏠 Мой гараж</span>
+        <span>🏠 <span data-i18n="garage">Мой гараж</span></span>
         <span class="count" id="garageCount">0</span>
     </button>
 
     <div class="log" id="log">
-        <div class="log-item"><span class="name">Тапай 👆 и открывай контейнеры!</span></div>
+        <div class="log-item"><span class="name" data-i18n="tap_hint">Тапай 👆 и открывай контейнеры!</span></div>
     </div>
 </div>
 
@@ -1035,11 +1540,11 @@
         <div class="sell-warning" id="sellWarning">⚠️ Скупщик даёт только 25%</div>
         <div class="modal-actions">
             <button class="modal-btn keep" id="modalKeepBtn">
-                🏠 В гараж
-                <span class="sub">Оставить</span>
+                🏠 <span data-i18n="keep">В гараж</span>
+                <span class="sub" data-i18n="keep_sub">Оставить</span>
             </button>
             <button class="modal-btn sell" id="modalSellBtn">
-                💸 Скупщику
+                💸 <span data-i18n="sell">Скупщику</span>
                 <span class="sub" id="sellPriceLabel">+3 000 $</span>
             </button>
         </div>
@@ -1049,115 +1554,314 @@
 <!-- Модалка гаража -->
 <div class="modal garage-modal" id="garageModal">
     <div class="modal-card">
-        <div class="garage-title">🏠 Мой гараж</div>
-        <div class="garage-total">Машин: <b id="garageTotalCount">0</b> · Стоимость: <b id="garageTotalValue">0 $</b></div>
+        <div class="garage-title">🏠 <span data-i18n="garage">Мой гараж</span></div>
+        <div class="garage-total"><span data-i18n="cars_label">Машин</span>: <b id="garageTotalCount">0</b> · <span data-i18n="value_label">Стоимость</span>: <b id="garageTotalValue">0 $</b></div>
         <div class="garage-list" id="garageList"></div>
-        <button class="garage-close" id="garageCloseBtn">Закрыть</button>
+        <button class="garage-close" id="garageCloseBtn" data-i18n="close">Закрыть</button>
     </div>
 </div>
 
 <!-- Модалка достижений -->
 <div class="modal ach-modal" id="achModal">
     <div class="modal-card">
-        <div class="garage-title">🏅 Достижения</div>
-        <div class="ach-progress">Открыто: <b id="achProgressText">0 / 10</b></div>
+        <div class="garage-title">🏅 <span data-i18n="achievements">Достижения</span></div>
+        <div class="ach-progress"><span data-i18n="unlocked">Открыто</span>: <b id="achProgressText">0 / 12</b></div>
         <div class="ach-list" id="achList"></div>
-        <button class="garage-close" id="achCloseBtn">Закрыть</button>
+        <button class="garage-close" id="achCloseBtn" data-i18n="close">Закрыть</button>
     </div>
 </div>
 
-<!-- Тост -->
+<!-- Модалка магазина -->
+<div class="modal shop-modal" id="shopModal">
+    <div class="modal-card">
+        <div class="garage-title">🛒 <span data-i18n="shop">Магазин</span></div>
+        <div class="shop-balance"><span data-i18n="balance_short">Баланс</span>: <b id="shopBalance">0 $</b></div>
+        <div class="shop-list" id="shopList"></div>
+        <button class="garage-close" id="shopCloseBtn" data-i18n="close">Закрыть</button>
+    </div>
+</div>
+
+<!-- Модалка настроек -->
+<div class="modal settings-modal" id="settingsModal">
+    <div class="modal-card">
+        <div class="garage-title">⚙️ <span data-i18n="settings">Настройки</span></div>
+
+        <div class="settings-list">
+            <div class="settings-item">
+                <div class="settings-label">👤 <span data-i18n="nickname">Никнейм</span></div>
+                <input type="text" class="settings-input" id="nicknameInput" maxlength="20" placeholder="Игрок" autocomplete="off">
+            </div>
+
+            <div class="settings-item">
+                <div class="settings-label">🌐 <span data-i18n="language">Язык</span></div>
+                <div class="lang-switch">
+                    <button class="lang-btn active" id="langRu">🇷🇺 Русский</button>
+                    <button class="lang-btn" id="langEn">🇬🇧 English</button>
+                </div>
+            </div>
+
+            <button class="settings-btn save" id="manualSaveBtn">
+                💾 <span data-i18n="save_now">Сохранить сейчас</span>
+            </button>
+
+            <button class="settings-btn reset" id="resetBtn">
+                🗑️ <span data-i18n="reset_progress">Сбросить прогресс</span>
+            </button>
+        </div>
+
+        <div class="settings-hint" data-i18n="autosave_hint">
+            💾 Прогресс также сохраняется автоматически
+        </div>
+
+        <button class="garage-close" id="settingsCloseBtn" style="margin-top: 12px;" data-i18n="close">Закрыть</button>
+    </div>
+</div>
+
 <div class="toast" id="toast">
     <div class="toast-icon" id="toastIcon">🏆</div>
     <div class="toast-content">
-        <div class="toast-title">Достижение!</div>
+        <div class="toast-title" id="toastTitle" data-i18n="achievement_toast">Достижение!</div>
         <div class="toast-name" id="toastName">Первая машина</div>
         <div class="toast-desc" id="toastDesc">Открой первый контейнер</div>
     </div>
 </div>
 
-<!-- Индикатор сохранения -->
-<div class="save-indicator" id="saveIndicator">💾 Сохранено</div>
+<div class="save-indicator" id="saveIndicator" data-i18n="saved">💾 Сохранено</div>
 
 <script>
     (function() {
         'use strict';
 
-        // ================== КОНСТАНТЫ ==================
-        const SAVE_KEY = 'carTapGame_v1';
-        const SELL_RATE = 0.25;           // обычная продажа — 25%
-        const JACKPOT_SELL_RATE = 1.0;    // джекпот продаётся за 100%
-        const tapValue = 1;
+        const SAVE_KEY = 'carTapGame_v5'; // v5 — финальная с бустами
+        const SELL_RATE = 0.25;
+        const JACKPOT_SELL_RATE = 1.0;
+        const BASE_TAP_VALUE = 1;
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        // ================== ЛОКАЛИЗАЦИЯ ==================
+        const TRANSLATIONS = {
+            ru: {
+                nickname: 'Никнейм', language: 'Язык', settings: 'Настройки',
+                save_now: 'Сохранить сейчас', reset_progress: 'Сбросить прогресс',
+                autosave_hint: '💾 Прогресс также сохраняется автоматически',
+                close: 'Закрыть', garage: 'Мой гараж', achievements: 'Достижения',
+                unlocked: 'Открыто', cars_label: 'Машин', value_label: 'Стоимость',
+                tap: 'Тап', cars: 'авто', tap_hint: 'Тапай 👆 и открывай контейнеры!',
+                container_common: 'Обычный', container_rare: 'Редкий',
+                container_epic: 'Эпический', container_legendary: 'Легендарный',
+                container_mythic: 'Мифический', keep: 'В гараж', keep_sub: 'Оставить',
+                sell: 'Скупщику', sell_sub: 'Продать', saved: '💾 Сохранено',
+                save_success: 'Прогресс сохранён!', save_error: 'Ошибка сохранения',
+                reset_confirm: 'Точно сбросить весь прогресс? Это действие нельзя отменить.',
+                reset_done: 'Прогресс сброшен', achievement_toast: 'Достижение!',
+                welcome_back: 'Прогресс загружен!', first_time: 'Тапай 👆 (+1$) и открывай контейнеры!',
+                autosave_info: '💾 Прогресс сохраняется автоматически',
+                continue_tap: '👆 Продолжай тапать!', in_garage: 'В гараже машин',
+                rarity_common: 'Обычная', rarity_rare: 'Редкая', rarity_epic: 'Эпическая',
+                rarity_legendary: 'Легендарная', rarity_mythic: 'МИФИЧЕСКАЯ',
+                sell_warning: '⚠️ Скупщик даёт только 25%',
+                sell_warning_jackpot: '✨ ДЖЕКПОТ продаётся за 100% стоимости! ✨',
+                jackpot_banner: '🎰 ДЖЕКПОТ 🎰', pct: '25%', pct_full: '100%',
+                ach_first_car: 'Первая машина', ach_first_car_desc: 'Открой свой первый контейнер',
+                ach_first_expensive: 'Первый дорогой', ach_first_expensive_desc: 'Получи машину дороже 100 000 $',
+                ach_jackpot_common: 'Джекпот: BMW', ach_jackpot_common_desc: 'Выбей BMW из обычного',
+                ach_jackpot_rare: 'Джекпот: Porsche', ach_jackpot_rare_desc: 'Выбей Porsche из редкого',
+                ach_jackpot_epic: 'Джекпот: Ferrari', ach_jackpot_epic_desc: 'Выбей Ferrari из эпического',
+                ach_jackpot_legendary: 'Джекпот: Bugatti', ach_jackpot_legendary_desc: 'Выбей Bugatti из легендарного',
+                ach_jackpot_mythic: 'МИФИЧЕСКИЙ ДЖЕКПОТ', ach_jackpot_mythic_desc: 'Выбей Koenigsegg',
+                ach_garage_5: 'Коллекционер', ach_garage_5_desc: 'Собери 5 машин в гараже',
+                ach_garage_20: 'Автомузей', ach_garage_20_desc: 'Собери 20 машин в гараже',
+                ach_millionaire: 'Миллионер', ach_millionaire_desc: 'Накопи 1 000 000 $',
+                ach_garage_50: 'Автолегенда', ach_garage_50_desc: 'Собери 50 машин в гараже',
+                ach_jackpot_all: 'Все джекпоты!', ach_jackpot_all_desc: 'Выбей все 5 джекпотов',
+                shop: 'Магазин', balance_short: 'Баланс', buy: 'Купить',
+                active_label: '✓ Активно',
+                boost_x2_name: 'x2 к тапу', boost_x2_desc: 'Удваивает деньги за тап',
+                boost_x3_name: 'x3 к тапу', boost_x3_desc: 'Утраивает деньги за тап',
+                boost_x5_name: 'x5 к тапу', boost_x5_desc: 'Пятикратный доход за тап',
+                boost_auto_name: 'Авто-тап', boost_auto_desc: 'Автоматически тапает 5 раз/сек',
+                boost_lucky_name: 'Удача', boost_lucky_desc: 'Удваивает шанс на джекпот',
+                boost_buy_success: 'Улучшение куплено!',
+                boost_not_enough: 'Недостаточно денег',
+                boost_already_active: 'Уже активно',
+                boost_extended: 'Продлено!',
+                boost_expired: 'Улучшение закончилось',
+                tap_value: 'Тап',
+                min: 'мин',
+                sec: 'сек'
+            },
+            en: {
+                nickname: 'Nickname', language: 'Language', settings: 'Settings',
+                save_now: 'Save now', reset_progress: 'Reset progress',
+                autosave_hint: '💾 Progress also saves automatically',
+                close: 'Close', garage: 'My garage', achievements: 'Achievements',
+                unlocked: 'Unlocked', cars_label: 'Cars', value_label: 'Value',
+                tap: 'Tap', cars: 'cars', tap_hint: 'Tap 👆 and open containers!',
+                container_common: 'Common', container_rare: 'Rare',
+                container_epic: 'Epic', container_legendary: 'Legendary',
+                container_mythic: 'Mythic', keep: 'To garage', keep_sub: 'Keep it',
+                sell: 'To dealer', sell_sub: 'Sell', saved: '💾 Saved',
+                save_success: 'Progress saved!', save_error: 'Save error',
+                reset_confirm: 'Really reset all progress? This cannot be undone.',
+                reset_done: 'Progress reset', achievement_toast: 'Achievement!',
+                welcome_back: 'Progress loaded!', first_time: 'Tap 👆 (+1$) and open containers!',
+                autosave_info: '💾 Progress saves automatically',
+                continue_tap: '👆 Keep tapping!', in_garage: 'Cars in garage',
+                rarity_common: 'Common', rarity_rare: 'Rare', rarity_epic: 'Epic',
+                rarity_legendary: 'Legendary', rarity_mythic: 'MYTHIC',
+                sell_warning: '⚠️ Dealer pays only 25%',
+                sell_warning_jackpot: '✨ JACKPOT sells for 100%! ✨',
+                jackpot_banner: '🎰 JACKPOT 🎰', pct: '25%', pct_full: '100%',
+                ach_first_car: 'First car', ach_first_car_desc: 'Open your first container',
+                ach_first_expensive: 'First expensive', ach_first_expensive_desc: 'Get a car worth over 100 000 $',
+                ach_jackpot_common: 'Jackpot: BMW', ach_jackpot_common_desc: 'Get BMW from common',
+                ach_jackpot_rare: 'Jackpot: Porsche', ach_jackpot_rare_desc: 'Get Porsche from rare',
+                ach_jackpot_epic: 'Jackpot: Ferrari', ach_jackpot_epic_desc: 'Get Ferrari from epic',
+                ach_jackpot_legendary: 'Jackpot: Bugatti', ach_jackpot_legendary_desc: 'Get Bugatti from legendary',
+                ach_jackpot_mythic: 'MYTHIC JACKPOT', ach_jackpot_mythic_desc: 'Get Koenigsegg',
+                ach_garage_5: 'Collector', ach_garage_5_desc: 'Collect 5 cars in garage',
+                ach_garage_20: 'Auto museum', ach_garage_20_desc: 'Collect 20 cars in garage',
+                ach_millionaire: 'Millionaire', ach_millionaire_desc: 'Accumulate 1 000 000 $',
+                ach_garage_50: 'Auto legend', ach_garage_50_desc: 'Collect 50 cars in garage',
+                ach_jackpot_all: 'All jackpots!', ach_jackpot_all_desc: 'Get all 5 jackpots',
+                shop: 'Shop', balance_short: 'Balance', buy: 'Buy',
+                active_label: '✓ Active',
+                boost_x2_name: 'x2 tap', boost_x2_desc: 'Doubles money per tap',
+                boost_x3_name: 'x3 tap', boost_x3_desc: 'Triples money per tap',
+                boost_x5_name: 'x5 tap', boost_x5_desc: '5x money per tap',
+                boost_auto_name: 'Auto-tap', boost_auto_desc: 'Automatically taps 5/s',
+                boost_lucky_name: 'Lucky', boost_lucky_desc: 'Doubles jackpot chance',
+                boost_buy_success: 'Boost purchased!',
+                boost_not_enough: 'Not enough money',
+                boost_already_active: 'Already active',
+                boost_extended: 'Extended!',
+                boost_expired: 'Boost expired',
+                tap_value: 'Tap',
+                min: 'min',
+                sec: 'sec'
+            }
+        };
+
+        let currentLang = 'ru';
+
+        function t(key) {
+            return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) || TRANSLATIONS.ru[key] || key;
+        }
+
+        // ================== БУСТЫ ==================
+        const BOOSTS = [
+            { id: 'tap_x2', icon: '⚡', nameKey: 'boost_x2_name', descKey: 'boost_x2_desc', price: 500, duration: 60, type: 'multiplier', value: 2 },
+            { id: 'tap_x3', icon: '🔥', nameKey: 'boost_x3_name', descKey: 'boost_x3_desc', price: 5_000, duration: 60, type: 'multiplier', value: 3 },
+            { id: 'tap_x5', icon: '💥', nameKey: 'boost_x5_name', descKey: 'boost_x5_desc', price: 50_000, duration: 60, type: 'multiplier', value: 5 },
+            { id: 'auto_tap', icon: '🤖', nameKey: 'boost_auto_name', descKey: 'boost_auto_desc', price: 10_000, duration: 120, type: 'auto', value: 5 },
+            { id: 'lucky', icon: '🍀', nameKey: 'boost_lucky_name', descKey: 'boost_lucky_desc', price: 25_000, duration: 120, type: 'lucky', value: 2 }
+        ];
 
         // ================== АВТОМОБИЛИ ==================
         const commonCars = [
-            { name: 'Lada Granta', price: 8_000, emoji: '🚗', rarity: 'common', chance: 30 },
-            { name: 'Lada Vesta', price: 12_000, emoji: '🚗', rarity: 'common', chance: 25 },
-            { name: 'Lada Niva', price: 10_000, emoji: '🚙', rarity: 'common', chance: 20 },
-            { name: 'UAZ Patriot', price: 15_000, emoji: '🚙', rarity: 'common', chance: 12 },
-            { name: 'GAZ Volga', price: 9_000, emoji: '🚕', rarity: 'common', chance: 8 },
-            { name: 'Renault Logan', price: 11_000, emoji: '🚗', rarity: 'common', chance: 3 },
-            { name: 'Hyundai Solaris', price: 14_000, emoji: '🚙', rarity: 'common', chance: 1.5 },
-            { name: 'BMW 3 Series', price: 45_000, emoji: '🏎️', rarity: 'rare', chance: 0.5, jackpot: true }
+            { name: 'Lada Granta', price: 6_000, emoji: '🚗', rarity: 'common', chance: 18 },
+            { name: 'Lada Vesta', price: 8_000, emoji: '🚗', rarity: 'common', chance: 15 },
+            { name: 'Lada Niva Legend', price: 7_500, emoji: '🚙', rarity: 'common', chance: 13 },
+            { name: 'Lada Kalina', price: 5_500, emoji: '🚗', rarity: 'common', chance: 10 },
+            { name: 'Lada Largus', price: 7_000, emoji: '🚙', rarity: 'common', chance: 8 },
+            { name: 'UAZ Patriot', price: 9_500, emoji: '🚙', rarity: 'common', chance: 8 },
+            { name: 'UAZ Hunter', price: 8_500, emoji: '🚙', rarity: 'common', chance: 6 },
+            { name: 'GAZ Volga', price: 6_500, emoji: '🚕', rarity: 'common', chance: 5 },
+            { name: 'GAZ Sobol', price: 7_200, emoji: '🚐', rarity: 'common', chance: 4 },
+            { name: 'Moskvich 3', price: 9_000, emoji: '🚙', rarity: 'common', chance: 3 },
+            { name: 'Renault Logan', price: 8_500, emoji: '🚗', rarity: 'common', chance: 3 },
+            { name: 'Datsun on-DO', price: 7_800, emoji: '🚗', rarity: 'common', chance: 2 },
+            { name: 'Hyundai Solaris', price: 10_000, emoji: '🚙', rarity: 'common', chance: 1.5 },
+            { name: 'Kia Rio', price: 10_500, emoji: '🚗', rarity: 'common', chance: 1 },
+            { name: 'BMW 3 Series', price: 30_000, emoji: '🏎️', rarity: 'rare', chance: 0.5, jackpot: true }
         ];
 
         const rareCars = [
-            { name: 'Lada Vesta Sport', price: 25_000, emoji: '🚗', rarity: 'common', chance: 25 },
-            { name: 'UAZ Patriot Limited', price: 30_000, emoji: '🚙', rarity: 'common', chance: 22 },
-            { name: 'Toyota Corolla', price: 28_000, emoji: '🚘', rarity: 'common', chance: 20 },
-            { name: 'Kia Rio', price: 22_000, emoji: '🚗', rarity: 'common', chance: 15 },
-            { name: 'Hyundai Elantra', price: 26_000, emoji: '🚘', rarity: 'common', chance: 10 },
-            { name: 'Skoda Octavia', price: 32_000, emoji: '🚗', rarity: 'rare', chance: 5 },
-            { name: 'Mazda 6', price: 38_000, emoji: '🚘', rarity: 'rare', chance: 2.5 },
-            { name: 'Porsche 911', price: 150_000, emoji: '🏎️', rarity: 'epic', chance: 0.5, jackpot: true }
+            { name: 'Lada Vesta Sport', price: 17_500, emoji: '🚗', rarity: 'common', chance: 15 },
+            { name: 'Lada Vesta SW Cross', price: 16_500, emoji: '🚙', rarity: 'common', chance: 12 },
+            { name: 'UAZ Patriot Limited', price: 22_000, emoji: '🚙', rarity: 'common', chance: 10 },
+            { name: 'UAZ Profi', price: 20_000, emoji: '🚙', rarity: 'common', chance: 8 },
+            { name: 'GAZ Volga Cyber', price: 18_000, emoji: '🚗', rarity: 'common', chance: 7 },
+            { name: 'Moskvich 3e', price: 19_500, emoji: '🚙', rarity: 'common', chance: 5 },
+            { name: 'Toyota Corolla', price: 20_000, emoji: '🚘', rarity: 'common', chance: 8 },
+            { name: 'Kia Rio X', price: 16_000, emoji: '🚗', rarity: 'common', chance: 7 },
+            { name: 'Hyundai Elantra', price: 18_000, emoji: '🚘', rarity: 'common', chance: 6 },
+            { name: 'Volkswagen Polo', price: 19_000, emoji: '🚗', rarity: 'common', chance: 5 },
+            { name: 'Skoda Rapid', price: 17_000, emoji: '🚗', rarity: 'common', chance: 4 },
+            { name: 'Renault Kaptur', price: 21_000, emoji: '🚙', rarity: 'common', chance: 3 },
+            { name: 'Skoda Octavia', price: 24_000, emoji: '🚗', rarity: 'rare', chance: 4 },
+            { name: 'Mazda 6', price: 28_000, emoji: '🚘', rarity: 'rare', chance: 2.5 },
+            { name: 'Porsche 911', price: 100_000, emoji: '🏎️', rarity: 'epic', chance: 0.5, jackpot: true }
         ];
 
         const epicCars = [
-            { name: 'Toyota Camry', price: 45_000, emoji: '🚘', rarity: 'common', chance: 25 },
-            { name: 'Kia K5', price: 42_000, emoji: '🚗', rarity: 'common', chance: 22 },
-            { name: 'Hyundai Sonata', price: 44_000, emoji: '🚙', rarity: 'common', chance: 18 },
-            { name: 'Volkswagen Passat', price: 52_000, emoji: '🚘', rarity: 'common', chance: 15 },
-            { name: 'BMW 5 Series', price: 90_000, emoji: '🏎️', rarity: 'rare', chance: 10 },
+            { name: 'Toyota Camry', price: 45_000, emoji: '🚘', rarity: 'common', chance: 15 },
+            { name: 'Kia K5', price: 42_000, emoji: '🚗', rarity: 'common', chance: 13 },
+            { name: 'Hyundai Sonata', price: 44_000, emoji: '🚙', rarity: 'common', chance: 12 },
+            { name: 'Volkswagen Passat', price: 52_000, emoji: '🚘', rarity: 'common', chance: 10 },
+            { name: 'Mazda 6', price: 48_000, emoji: '🚘', rarity: 'common', chance: 8 },
+            { name: 'Skoda Superb', price: 50_000, emoji: '🚘', rarity: 'common', chance: 7 },
+            { name: 'Honda Accord', price: 55_000, emoji: '🚘', rarity: 'common', chance: 6 },
+            { name: 'Nissan Teana', price: 47_000, emoji: '🚘', rarity: 'common', chance: 5 },
+            { name: 'BMW 5 Series', price: 90_000, emoji: '🏎️', rarity: 'rare', chance: 7 },
             { name: 'Mercedes E-Class', price: 85_000, emoji: '🚘', rarity: 'rare', chance: 6 },
-            { name: 'Audi A6', price: 78_000, emoji: '🚘', rarity: 'rare', chance: 3.5 },
+            { name: 'Audi A6', price: 78_000, emoji: '🚘', rarity: 'rare', chance: 5 },
+            { name: 'Lexus ES', price: 82_000, emoji: '🚘', rarity: 'rare', chance: 3 },
+            { name: 'Volvo S90', price: 75_000, emoji: '🚘', rarity: 'rare', chance: 2.5 },
+            { name: 'Jaguar XF', price: 88_000, emoji: '🚘', rarity: 'rare', chance: 2 },
             { name: 'Ferrari 488', price: 400_000, emoji: '🏎️', rarity: 'legendary', chance: 0.5, jackpot: true }
         ];
 
         const legendaryCars = [
-            { name: 'BMW X5', price: 120_000, emoji: '🚙', rarity: 'common', chance: 25 },
-            { name: 'Mercedes GLE', price: 130_000, emoji: '🚙', rarity: 'common', chance: 22 },
-            { name: 'Audi Q7', price: 125_000, emoji: '🚙', rarity: 'common', chance: 18 },
-            { name: 'Porsche Cayenne', price: 180_000, emoji: '🚙', rarity: 'rare', chance: 15 },
-            { name: 'BMW M5', price: 220_000, emoji: '🏎️', rarity: 'rare', chance: 10 },
-            { name: 'Mercedes AMG GT', price: 280_000, emoji: '🏎️', rarity: 'epic', chance: 6 },
-            { name: 'Porsche 911 Turbo', price: 320_000, emoji: '🏎️', rarity: 'epic', chance: 3.5 },
+            { name: 'BMW X5', price: 120_000, emoji: '🚙', rarity: 'common', chance: 15 },
+            { name: 'Mercedes GLE', price: 130_000, emoji: '🚙', rarity: 'common', chance: 13 },
+            { name: 'Audi Q7', price: 125_000, emoji: '🚙', rarity: 'common', chance: 12 },
+            { name: 'BMW X6', price: 140_000, emoji: '🚙', rarity: 'common', chance: 10 },
+            { name: 'Mercedes GLC', price: 115_000, emoji: '🚙', rarity: 'common', chance: 8 },
+            { name: 'Audi Q8', price: 135_000, emoji: '🚙', rarity: 'common', chance: 7 },
+            { name: 'Lexus RX', price: 110_000, emoji: '🚙', rarity: 'common', chance: 6 },
+            { name: 'Volvo XC90', price: 105_000, emoji: '🚙', rarity: 'common', chance: 5 },
+            { name: 'Porsche Cayenne', price: 180_000, emoji: '🚙', rarity: 'rare', chance: 7 },
+            { name: 'BMW M5', price: 220_000, emoji: '🏎️', rarity: 'rare', chance: 5 },
+            { name: 'Mercedes AMG GT', price: 280_000, emoji: '🏎️', rarity: 'epic', chance: 4 },
+            { name: 'Porsche 911 Turbo', price: 320_000, emoji: '🏎️', rarity: 'epic', chance: 3 },
+            { name: 'Audi RS7', price: 250_000, emoji: '🏎️', rarity: 'epic', chance: 2.5 },
+            { name: 'Mercedes S-Class', price: 200_000, emoji: '🚘', rarity: 'rare', chance: 2 },
             { name: 'Bugatti Chiron', price: 2_500_000, emoji: '🏎️', rarity: 'legendary', chance: 0.5, jackpot: true }
         ];
 
         const mythicCars = [
-            { name: 'Lamborghini Huracan', price: 450_000, emoji: '🏎️', rarity: 'rare', chance: 25 },
-            { name: 'Ferrari F8 Tributo', price: 500_000, emoji: '🏎️', rarity: 'rare', chance: 22 },
-            { name: 'McLaren 720S', price: 480_000, emoji: '🏎️', rarity: 'rare', chance: 18 },
-            { name: 'Aston Martin DB11', price: 420_000, emoji: '🏎️', rarity: 'epic', chance: 15 },
-            { name: 'Rolls-Royce Ghost', price: 700_000, emoji: '👑', rarity: 'epic', chance: 10 },
-            { name: 'Bugatti Veyron', price: 1_800_000, emoji: '🏎️', rarity: 'legendary', chance: 6 },
-            { name: 'Pagani Huayra', price: 2_400_000, emoji: '🏎️', rarity: 'legendary', chance: 3.5 },
+            { name: 'Lamborghini Huracan', price: 450_000, emoji: '🏎️', rarity: 'rare', chance: 15 },
+            { name: 'Ferrari F8 Tributo', price: 500_000, emoji: '🏎️', rarity: 'rare', chance: 13 },
+            { name: 'McLaren 720S', price: 480_000, emoji: '🏎️', rarity: 'rare', chance: 12 },
+            { name: 'Aston Martin DB11', price: 420_000, emoji: '🏎️', rarity: 'epic', chance: 10 },
+            { name: 'Lamborghini Aventador', price: 550_000, emoji: '🏎️', rarity: 'rare', chance: 8 },
+            { name: 'Porsche 918 Spyder', price: 900_000, emoji: '🏎️', rarity: 'epic', chance: 7 },
+            { name: 'Ferrari 812 Superfast', price: 600_000, emoji: '🏎️', rarity: 'epic', chance: 6 },
+            { name: 'Rolls-Royce Ghost', price: 700_000, emoji: '👑', rarity: 'epic', chance: 5 },
+            { name: 'Rolls-Royce Wraith', price: 650_000, emoji: '👑', rarity: 'epic', chance: 4 },
+            { name: 'Bugatti Veyron', price: 1_800_000, emoji: '🏎️', rarity: 'legendary', chance: 4 },
+            { name: 'Pagani Huayra', price: 2_400_000, emoji: '🏎️', rarity: 'legendary', chance: 3 },
+            { name: 'Koenigsegg Agera', price: 2_800_000, emoji: '🏎️', rarity: 'legendary', chance: 2 },
+            { name: 'McLaren P1', price: 1_500_000, emoji: '🏎️', rarity: 'legendary', chance: 2 },
+            { name: 'Lamborghini Veneno', price: 3_500_000, emoji: '🏎️', rarity: 'mythic', chance: 1.5 },
             { name: 'Koenigsegg Jesko', price: 4_500_000, emoji: '👑', rarity: 'mythic', chance: 0.5, jackpot: true }
         ];
 
         // ================== ДОСТИЖЕНИЯ ==================
         const achievements = [
-            { id: 'first_car', icon: '🚗', name: 'Первая машина', desc: 'Открой свой первый контейнер' },
-            { id: 'first_expensive', icon: '💎', name: 'Первый дорогой', desc: 'Получи машину дороже 100 000 $' },
-            { id: 'jackpot_common', icon: '🎰', name: 'Джекпот: BMW', desc: 'Выбей BMW из обычного' },
-            { id: 'jackpot_rare', icon: '🎰', name: 'Джекпот: Porsche', desc: 'Выбей Porsche из редкого' },
-            { id: 'jackpot_epic', icon: '🎰', name: 'Джекпот: Ferrari', desc: 'Выбей Ferrari из эпического' },
-            { id: 'jackpot_legendary', icon: '🎰', name: 'Джекпот: Bugatti', desc: 'Выбей Bugatti из легендарного' },
-            { id: 'jackpot_mythic', icon: '👑', name: 'МИФИЧЕСКИЙ ДЖЕКПОТ', desc: 'Выбей Koenigsegg' },
-            { id: 'garage_5', icon: '🏠', name: 'Коллекционер', desc: 'Собери 5 машин в гараже' },
-            { id: 'garage_20', icon: '🏛️', name: 'Автомузей', desc: 'Собери 20 машин в гараже' },
-            { id: 'millionaire', icon: '💰', name: 'Миллионер', desc: 'Накопи 1 000 000 $' }
+            { id: 'first_car', icon: '🚗', nameKey: 'ach_first_car', descKey: 'ach_first_car_desc' },
+            { id: 'first_expensive', icon: '💎', nameKey: 'ach_first_expensive', descKey: 'ach_first_expensive_desc' },
+            { id: 'jackpot_common', icon: '🎰', nameKey: 'ach_jackpot_common', descKey: 'ach_jackpot_common_desc' },
+            { id: 'jackpot_rare', icon: '🎰', nameKey: 'ach_jackpot_rare', descKey: 'ach_jackpot_rare_desc' },
+            { id: 'jackpot_epic', icon: '🎰', nameKey: 'ach_jackpot_epic', descKey: 'ach_jackpot_epic_desc' },
+            { id: 'jackpot_legendary', icon: '🎰', nameKey: 'ach_jackpot_legendary', descKey: 'ach_jackpot_legendary_desc' },
+            { id: 'jackpot_mythic', icon: '👑', nameKey: 'ach_jackpot_mythic', descKey: 'ach_jackpot_mythic_desc' },
+            { id: 'garage_5', icon: '🏠', nameKey: 'ach_garage_5', descKey: 'ach_garage_5_desc' },
+            { id: 'garage_20', icon: '🏛️', nameKey: 'ach_garage_20', descKey: 'ach_garage_20_desc' },
+            { id: 'garage_50', icon: '🏆', nameKey: 'ach_garage_50', descKey: 'ach_garage_50_desc' },
+            { id: 'millionaire', icon: '💰', nameKey: 'ach_millionaire', descKey: 'ach_millionaire_desc' },
+            { id: 'jackpot_all', icon: '👑', nameKey: 'ach_jackpot_all', descKey: 'ach_jackpot_all_desc' }
         ];
 
         // ================== СОСТОЯНИЕ ==================
@@ -1168,11 +1872,19 @@
         let currentCar = null;
         let carIdCounter = 0;
         let unlockedAchievements = new Set();
+        let nickname = 'Игрок';
+        let activeBoosts = {};      // объект: { boostId: { endTime, purchasedAt } }
+        let autoTapTimer = null;
+        let boostTickTimer = null;
 
         // ================== DOM ==================
         const $ = id => document.getElementById(id);
         const balanceDisplay = $('balanceDisplay');
+        const playerNameText = $('playerNameText');
+        const playerNameDisplay = $('playerNameDisplay');
         const tapArea = $('tapArea');
+        const tapValueDisplay = $('tapValueDisplay');
+        const tapMultiplier = $('tapMultiplier');
         const logContainer = $('log');
         const modal = $('modal');
         const modalCard = $('modalCard');
@@ -1201,7 +1913,25 @@
         const toastIcon = $('toastIcon');
         const toastName = $('toastName');
         const toastDesc = $('toastDesc');
+        const toastTitle = $('toastTitle');
         const saveIndicator = $('saveIndicator');
+
+        const settingsBtn = $('settingsBtn');
+        const settingsModal = $('settingsModal');
+        const settingsCloseBtn = $('settingsCloseBtn');
+        const nicknameInput = $('nicknameInput');
+        const langRu = $('langRu');
+        const langEn = $('langEn');
+        const manualSaveBtn = $('manualSaveBtn');
+        const resetBtn = $('resetBtn');
+
+        const shopBtn = $('shopBtn');
+        const shopModal = $('shopModal');
+        const shopCloseBtn = $('shopCloseBtn');
+        const shopList = $('shopList');
+        const shopBalance = $('shopBalance');
+        const boostBadge = $('boostBadge');
+        const activeBoostsPanel = $('activeBoostsPanel');  // ⚠️ ПЕРЕИМЕНОВАНО!
 
         const containerButtons = {
             common: $('commonBtn'),
@@ -1212,11 +1942,11 @@
         };
 
         const containerData = {
-            common:    { price: 500,        cars: commonCars,    jackpot: 'BMW 3 Series' },
-            rare:      { price: 5_000,      cars: rareCars,      jackpot: 'Porsche 911' },
-            epic:      { price: 50_000,     cars: epicCars,      jackpot: 'Ferrari 488' },
-            legendary: { price: 500_000,    cars: legendaryCars, jackpot: 'Bugatti Chiron' },
-            mythic:    { price: 5_000_000,  cars: mythicCars,    jackpot: 'Koenigsegg Jesko' }
+            common:    { price: 500,        cars: commonCars },
+            rare:      { price: 15_000,     cars: rareCars },
+            epic:      { price: 50_000,     cars: epicCars },
+            legendary: { price: 500_000,    cars: legendaryCars },
+            mythic:    { price: 5_000_000,  cars: mythicCars }
         };
 
         // ================== СОХРАНЕНИЕ ==================
@@ -1231,25 +1961,58 @@
             }, 1000);
         }
 
-        function saveProgress() {
+        function saveProgress(manual = false) {
             if (saveTimer) {
                 clearTimeout(saveTimer);
                 saveTimer = null;
             }
             try {
+                const boostsToSave = {};
+                const now = Date.now();
+                Object.keys(activeBoosts).forEach(id => {
+                    if (activeBoosts[id] && activeBoosts[id].endTime > now) {
+                        boostsToSave[id] = activeBoosts[id];
+                    }
+                });
+
                 const data = {
-                    version: 1,
+                    version: 5,
                     balance: balance,
                     openedCount: openedCount,
                     garage: garage,
                     carIdCounter: carIdCounter,
                     achievements: Array.from(unlockedAchievements),
-                    timestamp: Date.now()
+                    nickname: nickname,
+                    lang: currentLang,
+                    activeBoosts: boostsToSave,
+                    timestamp: now
                 };
                 localStorage.setItem(SAVE_KEY, JSON.stringify(data));
                 showSaveIndicator();
+                if (manual) {
+                    showToast({
+                        icon: '💾',
+                        name: t('save_success'),
+                        desc: t('saved'),
+                        isSimple: true
+                    });
+                }
             } catch (e) {
-                console.warn('Не удалось сохранить прогресс:', e);
+                console.warn('Save error:', e);
+                if (manual) {
+                    let reason = t('save_error');
+                    if (e.name === 'QuotaExceededError') {
+                        reason = currentLang === 'ru' ? 'Хранилище переполнено' : 'Storage full';
+                    } else if (e.name === 'SecurityError') {
+                        reason = currentLang === 'ru' ? 'Хранилище заблокировано' : 'Storage blocked';
+                    }
+                    showToast({
+                        icon: '⚠️',
+                        name: reason,
+                        desc: '',
+                        isSimple: true
+                    });
+                }
             }
         }
 
@@ -1263,17 +2026,30 @@
                 const raw = localStorage.getItem(SAVE_KEY);
                 if (!raw) return false;
                 const data = JSON.parse(raw);
-                if (!data || data.version !== 1) return false;
+                if (!data || data.version !== 5) return false;
 
                 balance = typeof data.balance === 'number' ? data.balance : 0;
                 openedCount = typeof data.openedCount === 'number' ? data.openedCount : 0;
                 garage = Array.isArray(data.garage) ? data.garage : [];
                 carIdCounter = typeof data.carIdCounter === 'number' ? data.carIdCounter : 0;
                 unlockedAchievements = new Set(Array.isArray(data.achievements) ? data.achievements : []);
+                nickname = typeof data.nickname === 'string' && data.nickname.trim() ? data.nickname : 'Игрок';
+                currentLang = (data.lang === 'en' || data.lang === 'ru') ? data.lang : 'ru';
+
+                activeBoosts = {};
+                const now = Date.now();
+                if (data.activeBoosts && typeof data.activeBoosts === 'object') {
+                    Object.keys(data.activeBoosts).forEach(id => {
+                        const boost = data.activeBoosts[id];
+                        if (boost && boost.endTime > now) {
+                            activeBoosts[id] = boost;
+                        }
+                    });
+                }
 
                 return true;
             } catch (e) {
-                console.warn('Не удалось загрузить прогресс:', e);
+                console.warn('Load error:', e);
                 return false;
             }
         }
@@ -1286,15 +2062,13 @@
         }
 
         function fmt(n) {
-            return n.toLocaleString('ru-RU');
+            return n.toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US');
         }
 
-        // Определяем, джекпот ли это (по полю jackpot у машины)
         function isJackpotCar(car) {
             return car && car.jackpot === true;
         }
 
-        // Процент продажи: 100% для джекпота, 25% для остальных
         function getSellRate(car) {
             return isJackpotCar(car) ? JACKPOT_SELL_RATE : SELL_RATE;
         }
@@ -1303,9 +2077,323 @@
             return Math.floor(car.price * getSellRate(car));
         }
 
+        // ================== БУСТЫ (логика) ==================
+        function getTapMultiplier() {
+            let multiplier = 1;
+            BOOSTS.forEach(boost => {
+                if (boost.type === 'multiplier' && activeBoosts[boost.id]) {
+                    if (activeBoosts[boost.id].endTime > Date.now()) {
+                        multiplier = Math.max(multiplier, boost.value);
+                    }
+                }
+            });
+            return multiplier;
+        }
+
+        function getTapValue() {
+            return BASE_TAP_VALUE * getTapMultiplier();
+        }
+
+        function hasAutoTap() {
+            return activeBoosts.auto_tap && activeBoosts.auto_tap.endTime > Date.now();
+        }
+
+        function hasLuckyBoost() {
+            return activeBoosts.lucky && activeBoosts.lucky.endTime > Date.now();
+        }
+
+        function activateBoost(boostId) {
+            const boost = BOOSTS.find(b => b.id === boostId);
+            if (!boost) return;
+
+            const now = Date.now();
+            const durationMs = boost.duration * 1000;
+
+            if (activeBoosts[boostId] && activeBoosts[boostId].endTime > now) {
+                activeBoosts[boostId].endTime += durationMs;
+            } else {
+                activeBoosts[boostId] = {
+                    endTime: now + durationMs,
+                    purchasedAt: now
+                };
+            }
+
+            if (boostId === 'auto_tap') {
+                startAutoTap();
+            }
+
+            startBoostTicker();
+            updateBoostUI();
+            addBoostLog(boost);
+            saveProgress();
+        }
+
+        function startAutoTap() {
+            if (autoTapTimer) return;
+            autoTapTimer = setInterval(() => {
+                if (!hasAutoTap()) {
+                    stopAutoTap();
+                    return;
+                }
+                const value = getTapValue();
+                balance += value;
+                updateBalance();
+                checkStateAchievements();
+                scheduleSave(2000);
+            }, 200);
+        }
+
+        function stopAutoTap() {
+            if (autoTapTimer) {
+                clearInterval(autoTapTimer);
+                autoTapTimer = null;
+            }
+        }
+
+        function startBoostTicker() {
+            if (boostTickTimer) return;
+            boostTickTimer = setInterval(() => {
+                const now = Date.now();
+                let anyActive = false;
+                const expired = [];
+
+                Object.keys(activeBoosts).forEach(id => {
+                    if (activeBoosts[id].endTime <= now) {
+                        expired.push(id);
+                    } else {
+                        anyActive = true;
+                    }
+                });
+
+                expired.forEach(id => {
+                    delete activeBoosts[id];
+                    const boost = BOOSTS.find(b => b.id === id);
+                    if (boost) {
+                        showToast({
+                            icon: boost.icon,
+                            name: t('boost_expired'),
+                            desc: t(boost.nameKey),
+                            isSimple: true
+                        });
+                    }
+                    if (id === 'auto_tap') stopAutoTap();
+                });
+
+                updateBoostUI();
+                if (shopModal.classList.contains('show')) {
+                    renderShop();
+                }
+
+                if (!anyActive) {
+                    clearInterval(boostTickTimer);
+                    boostTickTimer = null;
+                }
+            }, 1000);
+        }
+
+        function updateBoostUI() {
+            const now = Date.now();
+            const activeIds = Object.keys(activeBoosts).filter(id => activeBoosts[id].endTime > now);
+
+            // Бейдж на кнопке магазина
+            if (activeIds.length > 0) {
+                boostBadge.style.display = 'block';
+                boostBadge.textContent = activeIds.length;
+            } else {
+                boostBadge.style.display = 'none';
+            }
+
+            // Панель активных бустов
+            activeBoostsPanel.innerHTML = '';
+
+            if (activeIds.length === 0) {
+                activeBoostsPanel.classList.remove('show');
+            } else {
+                activeBoostsPanel.classList.add('show');
+                activeIds.forEach(id => {
+                    const boost = BOOSTS.find(b => b.id === id);
+                    if (!boost) return;
+                    const remaining = Math.max(0, Math.ceil((activeBoosts[id].endTime - now) / 1000));
+
+                    const chip = document.createElement('div');
+                    chip.className = 'boost-chip';
+                    chip.innerHTML = `
+                        <span class="chip-icon">${boost.icon}</span>
+                        <span>${t(boost.nameKey)}</span>
+                        <span class="chip-time">${remaining}${t('sec')}</span>
+                    `;
+                    activeBoostsPanel.appendChild(chip);
+                });
+            }
+
+            // Индикатор на тап-зоне
+            const mult = getTapMultiplier();
+            if (mult > 1) {
+                tapMultiplier.textContent = 'x' + mult;
+                tapMultiplier.classList.add('show');
+                tapArea.classList.add('boosted');
+            } else {
+                tapMultiplier.classList.remove('show');
+                tapArea.classList.remove('boosted');
+            }
+
+            // Значение тапа
+            tapValueDisplay.textContent = `+${getTapValue()} $`;
+        }
+
+        function addBoostLog(boost) {
+            const logItem = document.createElement('div');
+            logItem.className = 'log-item boost';
+            logItem.innerHTML = `<span class="name">${boost.icon} ${t(boost.nameKey)} — ${boost.duration}${t('sec')}</span><span class="price" style="color:#7ae0a0">✓</span>`;
+            logContainer.prepend(logItem);
+            while (logContainer.children.length > 15) {
+                logContainer.removeChild(logContainer.lastChild);
+            }
+        }
+
+        // ================== МАГАЗИН ==================
+        function openShop() {
+            renderShop();
+            shopModal.classList.add('show');
+        }
+
+        function closeShop() {
+            shopModal.classList.remove('show');
+        }
+
+        function renderShop() {
+            if (!shopList || !shopBalance) return;
+
+            shopBalance.textContent = fmt(balance) + ' $';
+            shopList.innerHTML = '';
+
+            const now = Date.now();
+            const fragment = document.createDocumentFragment();
+
+            BOOSTS.forEach(boost => {
+                const isActive = activeBoosts[boost.id] && activeBoosts[boost.id].endTime > now;
+                const canAfford = balance >= boost.price;
+
+                const item = document.createElement('div');
+                item.className = 'shop-item';
+                if (isActive) item.classList.add('active-boost');
+
+                const icon = document.createElement('div');
+                icon.className = 'shop-item-icon';
+                icon.textContent = boost.icon;
+
+                const info = document.createElement('div');
+                info.className = 'shop-item-info';
+
+                const name = document.createElement('div');
+                name.className = 'shop-item-name';
+                name.textContent = t(boost.nameKey);
+
+                const desc = document.createElement('div');
+                desc.className = 'shop-item-desc';
+                desc.textContent = t(boost.descKey);
+
+                const duration = document.createElement('div');
+                duration.className = 'shop-item-duration';
+                duration.textContent = '⏱ ' + boost.duration + ' ' + t('sec');
+
+                info.appendChild(name);
+                info.appendChild(desc);
+                info.appendChild(duration);
+
+                const priceWrap = document.createElement('div');
+                priceWrap.className = 'shop-item-price';
+
+                const priceTag = document.createElement('div');
+                priceTag.className = 'shop-price-tag' + (canAfford ? '' : ' cant-afford');
+                priceTag.textContent = fmt(boost.price) + ' $';
+
+                const buyBtn = document.createElement('button');
+                buyBtn.className = 'shop-buy-btn';
+
+                if (isActive) {
+                    buyBtn.classList.add('plus-btn');
+                    buyBtn.textContent = '+ ' + fmt(boost.price) + ' $';
+                    buyBtn.addEventListener('click', () => tryBuyBoost(boost.id, true));
+                } else {
+                    buyBtn.textContent = t('buy');
+                    if (!canAfford) {
+                        buyBtn.classList.add('disabled');
+                        buyBtn.disabled = true;
+                    } else {
+                        buyBtn.addEventListener('click', () => tryBuyBoost(boost.id, false));
+                    }
+                }
+
+                priceWrap.appendChild(priceTag);
+                priceWrap.appendChild(buyBtn);
+
+                item.appendChild(icon);
+                item.appendChild(info);
+                item.appendChild(priceWrap);
+                fragment.appendChild(item);
+            });
+
+            shopList.appendChild(fragment);
+        }
+
+        function tryBuyBoost(boostId, extend) {
+            const boost = BOOSTS.find(b => b.id === boostId);
+            if (!boost) return;
+
+            if (balance < boost.price) {
+                showToast({
+                    icon: '⚠️',
+                    name: t('boost_not_enough'),
+                    desc: '',
+                    isSimple: true
+                });
+                vibrate([30, 30]);
+                return;
+            }
+
+            balance -= boost.price;
+            updateBalance();
+            activateBoost(boostId);
+
+            showToast({
+                icon: boost.icon,
+                name: extend ? t('boost_extended') : t('boost_buy_success'),
+                desc: t(boost.nameKey),
+                isSimple: true
+            });
+            vibrate([15, 30, 15]);
+            renderShop();
+        }
+
+        // ================== ЛОКАЛИЗАЦИЯ ==================
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const val = t(key);
+                if (val) el.textContent = val;
+            });
+            document.documentElement.lang = currentLang;
+            document.title = currentLang === 'ru' ? '🚗 Контейнеры с тачками' : '🚗 Car Containers';
+            updateBalance();
+            updateGarageCount();
+            updateAchCounter();
+            renderGarage();
+            renderAchievements();
+            updateNicknameDisplay();
+            updateBoostUI();
+        }
+
+        function updateNicknameDisplay() {
+            playerNameText.textContent = nickname || 'Игрок';
+        }
+
         // ================== UI ==================
         function updateBalance() {
             balanceDisplay.textContent = fmt(balance);
+            if (shopModal.classList.contains('show')) {
+                shopBalance.textContent = fmt(balance) + ' $';
+            }
         }
 
         function updateGarageCount() {
@@ -1317,10 +2405,7 @@
         }
 
         function rarityName(r) {
-            return {
-                common: 'Обычная', rare: 'Редкая', epic: 'Эпическая',
-                legendary: 'Легендарная', mythic: 'МИФИЧЕСКАЯ'
-            }[r] || 'Обычная';
+            return t('rarity_' + r);
         }
 
         function addLog(car, action) {
@@ -1356,7 +2441,7 @@
         function addAchLog(ach) {
             const logItem = document.createElement('div');
             logItem.className = 'log-item achievement';
-            logItem.innerHTML = `<span class="name">${ach.icon} ${ach.name}</span><span class="price" style="color:#ffd966">🏅</span>`;
+            logItem.innerHTML = `<span class="name">${ach.icon} ${t(ach.nameKey)}</span><span class="price" style="color:#ffd966">🏅</span>`;
             logContainer.prepend(logItem);
             while (logContainer.children.length > 15) {
                 logContainer.removeChild(logContainer.lastChild);
@@ -1382,9 +2467,19 @@
 
         let toastTimer = null;
         function showToast(ach) {
-            toastIcon.textContent = ach.icon;
-            toastName.textContent = ach.name;
-            toastDesc.textContent = ach.desc;
+            if (ach.isSimple) {
+                toastIcon.textContent = ach.icon;
+                toastTitle.textContent = '';
+                toastName.textContent = ach.name;
+                toastDesc.textContent = ach.desc || '';
+                toastDesc.style.display = ach.desc ? 'block' : 'none';
+            } else {
+                toastIcon.textContent = ach.icon;
+                toastTitle.textContent = t('achievement_toast');
+                toastName.textContent = t(ach.nameKey);
+                toastDesc.textContent = t(ach.descKey);
+                toastDesc.style.display = 'block';
+            }
             toast.classList.add('show');
             if (toastTimer) clearTimeout(toastTimer);
             toastTimer = setTimeout(() => {
@@ -1394,13 +2489,11 @@
 
         // ================== АНИМАЦИЯ ДЖЕКПОТА ==================
         function playJackpotAnimation() {
-            // 1. Вспышка
             const flash = document.createElement('div');
             flash.className = 'jackpot-flash';
             document.body.appendChild(flash);
             setTimeout(() => flash.remove(), 700);
 
-            // 2. Конфетти
             const colors = ['#ffd966', '#ff4d6d', '#4dabff', '#b366ff', '#7ae0a0', '#ffffff'];
             const pieces = [];
             for (let i = 0; i < 50; i++) {
@@ -1416,28 +2509,23 @@
                 document.body.appendChild(piece);
                 pieces.push(piece);
             }
-            // Убираем конфетти через 5 сек
             setTimeout(() => {
                 pieces.forEach(p => p.remove());
             }, 5000);
 
-            // 3. Вибрация
             vibrate([50, 50, 50, 50, 100, 50, 50, 50, 200]);
 
-            // 4. Звук через Web Audio (короткий "победный" сигнал)
             try {
                 playJackpotSound();
             } catch (e) {}
         }
 
-        // Простой синтезированный звук джекпота через Web Audio API
         function playJackpotSound() {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             if (!AudioContext) return;
             const ctx = new AudioContext();
 
-            // Аккорд: до-мажор восходящий
-            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+            const notes = [523.25, 659.25, 783.99, 1046.50];
             notes.forEach((freq, i) => {
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
@@ -1453,21 +2541,19 @@
                 osc.stop(startTime + 0.5);
             });
 
-            // Финальный "звенящий" звук
             const osc2 = ctx.createOscillator();
             const gain2 = ctx.createGain();
             osc2.type = 'sine';
-            osc2.frequency.value = 1568; // G6
-            const t = ctx.currentTime + 0.5;
-            gain2.gain.setValueAtTime(0, t);
-            gain2.gain.linearRampToValueAtTime(0.1, t + 0.02);
-            gain2.gain.exponentialRampToValueAtTime(0.001, t + 0.8);
+            osc2.frequency.value = 1568;
+            const t2 = ctx.currentTime + 0.5;
+            gain2.gain.setValueAtTime(0, t2);
+            gain2.gain.linearRampToValueAtTime(0.1, t2 + 0.02);
+            gain2.gain.exponentialRampToValueAtTime(0.001, t2 + 0.8);
             osc2.connect(gain2);
             gain2.connect(ctx.destination);
-            osc2.start(t);
-            osc2.stop(t + 0.8);
+            osc2.start(t2);
+            osc2.stop(t2 + 0.8);
 
-            // Закрываем контекст через 2 секунды
             setTimeout(() => ctx.close(), 2000);
         }
 
@@ -1478,7 +2564,6 @@
             currentCar = car;
             const isJackpot = isJackpotCar(car);
 
-            // Сброс предыдущих джекпот-эффектов
             if (jackpotCleanup) jackpotCleanup();
 
             modalRarity.textContent = rarityName(car.rarity);
@@ -1491,25 +2576,21 @@
             sellPriceLabel.textContent = `+${fmt(sellPrice)} $`;
 
             if (isJackpot) {
-                // Режим джекпота
                 modalCard.classList.add('jackpot');
                 modalEmoji.classList.add('jackpot-emoji');
                 sellWarning.classList.add('jackpot-bonus');
-                sellWarning.textContent = '✨ ДЖЕКПОТ продаётся за 100% стоимости! ✨';
+                sellWarning.textContent = t('sell_warning_jackpot');
                 modalSellBtn.classList.add('jackpot');
 
-                // Баннер "ДЖЕКПОТ"
                 const banner = document.createElement('div');
                 banner.className = 'jackpot-banner';
-                banner.textContent = '🎰 ДЖЕКПОТ 🎰';
+                banner.textContent = t('jackpot_banner');
                 modalCard.appendChild(banner);
 
-                // Лучи
                 const rays = document.createElement('div');
                 rays.className = 'jackpot-rays';
                 modalCard.appendChild(rays);
 
-                // Звёзды вокруг
                 const starPositions = [
                     { top: '15%', left: '10%', delay: '0s' },
                     { top: '25%', right: '12%', delay: '0.2s' },
@@ -1539,11 +2620,10 @@
 
                 playJackpotAnimation();
             } else {
-                // Обычный режим
                 modalCard.classList.remove('jackpot');
                 modalEmoji.classList.remove('jackpot-emoji');
                 sellWarning.classList.remove('jackpot-bonus');
-                sellWarning.textContent = '⚠️ Скупщик даёт только 25%';
+                sellWarning.textContent = t('sell_warning');
                 modalSellBtn.classList.remove('jackpot');
                 jackpotCleanup = null;
             }
@@ -1561,11 +2641,16 @@
         }
 
         function getRandomCar(cars) {
-            const totalWeight = cars.reduce((sum, c) => sum + c.chance, 0);
+            const luckyActive = hasLuckyBoost();
+            const totalWeight = cars.reduce((sum, c) => {
+                const w = c.jackpot && luckyActive ? c.chance * 2 : c.chance;
+                return sum + w;
+            }, 0);
             let random = Math.random() * totalWeight;
             for (const car of cars) {
-                if (random < car.chance) return car;
-                random -= car.chance;
+                const w = car.jackpot && luckyActive ? car.chance * 2 : car.chance;
+                if (random < w) return car;
+                random -= w;
             }
             return cars[cars.length - 1];
         }
@@ -1617,6 +2702,11 @@
                 };
                 const achId = map[car.fromContainer];
                 if (achId) unlockAchievement(achId);
+
+                const allJackpots = ['jackpot_common', 'jackpot_rare', 'jackpot_epic', 'jackpot_legendary', 'jackpot_mythic'];
+                if (allJackpots.every(id => unlockedAchievements.has(id))) {
+                    unlockAchievement('jackpot_all');
+                }
             }
         }
 
@@ -1624,6 +2714,7 @@
             if (balance >= 1_000_000) unlockAchievement('millionaire');
             if (garage.length >= 5) unlockAchievement('garage_5');
             if (garage.length >= 20) unlockAchievement('garage_20');
+            if (garage.length >= 50) unlockAchievement('garage_50');
         }
 
         function keepCar() {
@@ -1664,7 +2755,7 @@
             garageList.innerHTML = '';
 
             if (garage.length === 0) {
-                garageList.innerHTML = '<div class="garage-empty">🚗 Гараж пуст.<br>Открывай контейнеры и оставляй машины!</div>';
+                garageList.innerHTML = `<div class="garage-empty">🚗 ${currentLang === 'ru' ? 'Гараж пуст.' : 'Garage is empty.'}<br>${currentLang === 'ru' ? 'Открывай контейнеры и оставляй машины!' : 'Open containers and keep cars!'}</div>`;
                 garageTotalCount.textContent = '0';
                 garageTotalValue.textContent = '0 $';
                 return;
@@ -1702,7 +2793,7 @@
                 info.appendChild(price);
 
                 const sellPrice = getSellPrice(car);
-                const sellPct = isJackpot ? '100%' : '25%';
+                const sellPct = isJackpot ? t('pct_full') : t('pct');
                 const sellBtn = document.createElement('button');
                 sellBtn.className = 'garage-item-sell';
                 if (isJackpot) sellBtn.classList.add('jackpot');
@@ -1756,11 +2847,11 @@
 
                 const name = document.createElement('div');
                 name.className = 'ach-item-name';
-                name.textContent = ach.name;
+                name.textContent = t(ach.nameKey);
 
                 const desc = document.createElement('div');
                 desc.className = 'ach-item-desc';
-                desc.textContent = ach.desc;
+                desc.textContent = t(ach.descKey);
 
                 info.appendChild(name);
                 info.appendChild(desc);
@@ -1779,6 +2870,45 @@
             achList.appendChild(fragment);
         }
 
+        // ================== НАСТРОЙКИ ==================
+        function openSettings() {
+            nicknameInput.value = nickname;
+            updateLangButtons();
+            settingsModal.classList.add('show');
+        }
+
+        function closeSettings() {
+            const newNick = nicknameInput.value.trim().slice(0, 20);
+            if (newNick && newNick !== nickname) {
+                nickname = newNick;
+                updateNicknameDisplay();
+                saveProgress();
+            } else if (!newNick && nickname) {
+                nicknameInput.value = nickname;
+            }
+            settingsModal.classList.remove('show');
+        }
+
+        function updateLangButtons() {
+            if (currentLang === 'ru') {
+                langRu.classList.add('active');
+                langEn.classList.remove('active');
+            } else {
+                langRu.classList.remove('active');
+                langEn.classList.add('active');
+            }
+        }
+
+        function changeLang(lang) {
+            if (lang === currentLang) return;
+            currentLang = lang;
+            updateLangButtons();
+            applyTranslations();
+            renderShop();
+            saveProgress();
+            vibrate(10);
+        }
+
         // ================== ТАП ==================
         let tapLocked = false;
 
@@ -1786,15 +2916,16 @@
             if (tapLocked) return;
             tapLocked = true;
 
-            balance += tapValue;
+            const value = getTapValue();
+            balance += value;
             updateBalance();
 
             tapArea.classList.add('pressed');
             setTimeout(() => tapArea.classList.remove('pressed'), 80);
 
             const floating = document.createElement('div');
-            floating.className = 'floating-money';
-            floating.textContent = `+${tapValue}$`;
+            floating.className = 'floating-money' + (value > 1 ? ' boosted' : '');
+            floating.textContent = `+${value}$`;
             floating.style.left = clientX + 'px';
             floating.style.top = clientY + 'px';
             document.body.appendChild(floating);
@@ -1815,8 +2946,8 @@
         if (!window.PointerEvent) {
             tapArea.addEventListener('touchstart', (e) => {
                 e.preventDefault();
-                const t = e.touches[0];
-                handleTap(t.clientX, t.clientY);
+                const tch = e.touches[0];
+                handleTap(tch.clientX, tch.clientY);
             }, { passive: false });
             tapArea.addEventListener('mousedown', (e) => {
                 handleTap(e.clientX, e.clientY);
@@ -1825,7 +2956,9 @@
 
         // ================== ОБРАБОТЧИКИ ==================
         Object.keys(containerButtons).forEach(type => {
-            containerButtons[type].addEventListener('click', () => openContainer(type));
+            if (containerButtons[type]) {
+                containerButtons[type].addEventListener('click', () => openContainer(type));
+            }
         });
 
         modalKeepBtn.addEventListener('click', keepCar);
@@ -1841,6 +2974,85 @@
         achCloseBtn.addEventListener('click', closeAch);
         achModal.addEventListener('click', (e) => {
             if (e.target === achModal) closeAch();
+        });
+
+        shopBtn.addEventListener('click', openShop);
+        shopCloseBtn.addEventListener('click', closeShop);
+        shopModal.addEventListener('click', (e) => {
+            if (e.target === shopModal) closeShop();
+        });
+
+        playerNameDisplay.addEventListener('click', () => {
+            openSettings();
+            setTimeout(() => nicknameInput.focus(), 200);
+        });
+
+        settingsBtn.addEventListener('click', openSettings);
+        settingsCloseBtn.addEventListener('click', closeSettings);
+        settingsModal.addEventListener('click', (e) => {
+            if (e.target === settingsModal) closeSettings();
+        });
+
+        langRu.addEventListener('click', () => changeLang('ru'));
+        langEn.addEventListener('click', () => changeLang('en'));
+
+        manualSaveBtn.addEventListener('click', () => {
+            const newNick = nicknameInput.value.trim().slice(0, 20);
+            if (newNick) nickname = newNick;
+            updateNicknameDisplay();
+            saveProgress(true);
+            vibrate(15);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            if (!confirm(t('reset_confirm'))) return;
+            try { localStorage.removeItem(SAVE_KEY); } catch (e) {}
+            balance = 0;
+            openedCount = 0;
+            garage = [];
+            carIdCounter = 0;
+            unlockedAchievements = new Set();
+            nickname = 'Игрок';
+            activeBoosts = {};
+            stopAutoTap();
+            if (boostTickTimer) {
+                clearInterval(boostTickTimer);
+                boostTickTimer = null;
+            }
+            updateBalance();
+            updateGarageCount();
+            updateAchCounter();
+            updateNicknameDisplay();
+            updateBoostUI();
+            nicknameInput.value = nickname;
+            logContainer.innerHTML = '';
+            const initLog = document.createElement('div');
+            initLog.className = 'log-item';
+            initLog.innerHTML = `<span class="name">${t('reset_done')}</span>`;
+            logContainer.appendChild(initLog);
+            vibrate([50, 50, 100]);
+            saveProgress();
+            showToast({
+                icon: '🗑️',
+                name: t('reset_done'),
+                desc: '',
+                isSimple: true
+            });
+        });
+
+        nicknameInput.addEventListener('blur', () => {
+            const newNick = nicknameInput.value.trim().slice(0, 20);
+            if (newNick && newNick !== nickname) {
+                nickname = newNick;
+                updateNicknameDisplay();
+                saveProgress();
+            }
+        });
+
+        nicknameInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                nicknameInput.blur();
+            }
         });
 
         document.addEventListener('gesturestart', (e) => e.preventDefault());
@@ -1863,39 +3075,45 @@
         updateBalance();
         updateGarageCount();
         updateAchCounter();
+        updateNicknameDisplay();
+        applyTranslations();
+
+        if (Object.keys(activeBoosts).length > 0) {
+            startBoostTicker();
+            if (hasAutoTap()) startAutoTap();
+        }
+        updateBoostUI();
 
         logContainer.innerHTML = '';
 
         if (loaded) {
             const welcomeItem = document.createElement('div');
             welcomeItem.className = 'log-item achievement';
-            welcomeItem.innerHTML = `<span class="name">💾 Прогресс загружен! Баланс: ${fmt(balance)} $</span>`;
+            welcomeItem.innerHTML = `<span class="name">💾 ${t('welcome_back')} ${fmt(balance)} $</span>`;
             logContainer.appendChild(welcomeItem);
 
             if (garage.length > 0) {
                 const garageItem = document.createElement('div');
                 garageItem.className = 'log-item';
-                garageItem.innerHTML = `<span class="name">🏠 В гараже машин: ${garage.length}</span>`;
+                garageItem.innerHTML = `<span class="name">🏠 ${t('in_garage')}: ${garage.length}</span>`;
                 logContainer.appendChild(garageItem);
             }
 
             const hintItem = document.createElement('div');
             hintItem.className = 'log-item';
-            hintItem.innerHTML = `<span class="name">👆 Продолжай тапать!</span>`;
+            hintItem.innerHTML = `<span class="name">${t('continue_tap')}</span>`;
             logContainer.appendChild(hintItem);
         } else {
             const initLog = document.createElement('div');
             initLog.className = 'log-item';
-            initLog.innerHTML = '<span class="name">Тапай 👆 (+1$) и открывай контейнеры!</span>';
+            initLog.innerHTML = `<span class="name">${t('first_time')}</span>`;
             logContainer.appendChild(initLog);
 
             const hintLog = document.createElement('div');
             hintLog.className = 'log-item';
-            hintLog.innerHTML = '<span class="name">💾 Прогресс сохраняется автоматически</span>';
+            hintLog.innerHTML = `<span class="name">${t('autosave_info')}</span>`;
             logContainer.appendChild(hintLog);
-        }
 
-        if (!loaded) {
             saveProgress();
         }
     })();
