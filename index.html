@@ -1783,7 +1783,7 @@
     (function() {
         'use strict';
 
-        const SAVE_KEY = 'carTapGame_v11';
+        const SAVE_KEY = 'carTapGame_v12';
         const SELL_RATE = 0.25;
         const JACKPOT_SELL_RATE = 2.5;
         const BASE_TAP_VALUE = 1;
@@ -1959,34 +1959,33 @@
             return idx >= 0 && idx < LEVELS.length - 1 ? LEVELS[idx + 1] : null;
         }
 
-        // ================== БУСТЫ ==================
+        // ================== БУСТЫ (обновлены цены удачи) ==================
         const BOOSTS = [
             { id: 'tap_x2', icon: '⚡', nameKey: 'boost_x2_name', descKey: 'boost_x2_desc', price: 100, duration: 120, type: 'multiplier', value: 2 },
             { id: 'tap_x3', icon: '🔥', nameKey: 'boost_x3_name', descKey: 'boost_x3_desc', price: 1_000, duration: 120, type: 'multiplier', value: 3 },
             { id: 'tap_x5', icon: '💥', nameKey: 'boost_x5_name', descKey: 'boost_x5_desc', price: 5_000, duration: 180, type: 'multiplier', value: 5 },
             { id: 'auto_tap', icon: '🤖', nameKey: 'boost_auto_name', descKey: 'boost_auto_desc', price: 2_000, duration: 180, type: 'auto', value: 10 },
-            { id: 'lucky', icon: '🍀', nameKey: 'boost_lucky_name', descKey: 'boost_lucky_desc', price: 3_000, duration: 180, type: 'lucky', value: 2 },
-            { id: 'lucky_x5', icon: '🌟', nameKey: 'boost_lucky_x5_name', descKey: 'boost_lucky_x5_desc', price: 10_000, duration: 180, type: 'lucky', value: 3 }
+            { id: 'lucky', icon: '🍀', nameKey: 'boost_lucky_name', descKey: 'boost_lucky_desc', price: 50_000, duration: 180, type: 'lucky', value: 2 },
+            { id: 'lucky_x5', icon: '🌟', nameKey: 'boost_lucky_x5_name', descKey: 'boost_lucky_x5_desc', price: 250_000, duration: 180, type: 'lucky', value: 3 }
         ];
 
         // ================== АВТОМОБИЛИ ==================
-        // Обычный контейнер (500 $) — теперь УБЫТОЧНЫЙ
         const commonCars = [
-            { name: 'Lada Granta', price: 1_500, emoji: '🚗', rarity: 'common', chance: 18 },      // 25% → 375 $ → −125 $
-            { name: 'Lada Kalina', price: 1_300, emoji: '🚗', rarity: 'common', chance: 15 },      // 25% → 325 $ → −175 $
-            { name: 'Lada Niva Legend', price: 1_800, emoji: '🚙', rarity: 'common', chance: 13 }, // 25% → 450 $ → −50 $
-            { name: 'Lada Largus', price: 1_700, emoji: '🚙', rarity: 'common', chance: 10 },      // 25% → 425 $ → −75 $
-            { name: 'GAZ Volga', price: 1_400, emoji: '🚕', rarity: 'common', chance: 8 },         // 25% → 350 $ → −150 $
-            { name: 'GAZ Sobol', price: 1_600, emoji: '🚐', rarity: 'common', chance: 6 },         // 25% → 400 $ → −100 $
-            { name: 'UAZ Hunter', price: 1_900, emoji: '🚙', rarity: 'common', chance: 5 },        // 25% → 475 $ → −25 $
-            { name: 'Datsun on-DO', price: 1_700, emoji: '🚗', rarity: 'common', chance: 4 },      // 25% → 425 $ → −75 $
-            { name: 'Lada Vesta', price: 2_200, emoji: '🚗', rarity: 'common', chance: 8 },        // 25% → 550 $ → +50 $
-            { name: 'UAZ Patriot', price: 2_500, emoji: '🚙', rarity: 'common', chance: 6 },       // 25% → 625 $ → +125 $
-            { name: 'Moskvich 3', price: 2_400, emoji: '🚙', rarity: 'common', chance: 4 },        // 25% → 600 $ → +100 $
-            { name: 'Renault Logan', price: 2_300, emoji: '🚗', rarity: 'common', chance: 3 },     // 25% → 575 $ → +75 $
-            { name: 'Hyundai Solaris', price: 4_500, emoji: '🚙', rarity: 'common', chance: 1.5 }, // 25% → 1 125 $ → +625 $
-            { name: 'Kia Rio', price: 4_800, emoji: '🚗', rarity: 'common', chance: 1 },           // 25% → 1 200 $ → +700 $
-            { name: 'BMW 3 Series', price: 30_000, emoji: '🏎️', rarity: 'rare', chance: 0.5, jackpot: true } // 250% → 75 000 $ → +74 500 $
+            { name: 'Lada Granta', price: 1_500, emoji: '🚗', rarity: 'common', chance: 18 },
+            { name: 'Lada Kalina', price: 1_300, emoji: '🚗', rarity: 'common', chance: 15 },
+            { name: 'Lada Niva Legend', price: 1_800, emoji: '🚙', rarity: 'common', chance: 13 },
+            { name: 'Lada Largus', price: 1_700, emoji: '🚙', rarity: 'common', chance: 10 },
+            { name: 'GAZ Volga', price: 1_400, emoji: '🚕', rarity: 'common', chance: 8 },
+            { name: 'GAZ Sobol', price: 1_600, emoji: '🚐', rarity: 'common', chance: 6 },
+            { name: 'UAZ Hunter', price: 1_900, emoji: '🚙', rarity: 'common', chance: 5 },
+            { name: 'Datsun on-DO', price: 1_700, emoji: '🚗', rarity: 'common', chance: 4 },
+            { name: 'Lada Vesta', price: 2_200, emoji: '🚗', rarity: 'common', chance: 8 },
+            { name: 'UAZ Patriot', price: 2_500, emoji: '🚙', rarity: 'common', chance: 6 },
+            { name: 'Moskvich 3', price: 2_400, emoji: '🚙', rarity: 'common', chance: 4 },
+            { name: 'Renault Logan', price: 2_300, emoji: '🚗', rarity: 'common', chance: 3 },
+            { name: 'Hyundai Solaris', price: 4_500, emoji: '🚙', rarity: 'common', chance: 1.5 },
+            { name: 'Kia Rio', price: 4_800, emoji: '🚗', rarity: 'common', chance: 1 },
+            { name: 'BMW 3 Series', price: 30_000, emoji: '🏎️', rarity: 'rare', chance: 0.5, jackpot: true }
         ];
 
         const rareCars = [
@@ -2213,7 +2212,7 @@
                 });
 
                 const data = {
-                    version: 11,
+                    version: 12,
                     balance: balance,
                     openedCount: openedCount,
                     garage: garage,
@@ -2267,7 +2266,7 @@
                 const raw = localStorage.getItem(SAVE_KEY);
                 if (!raw) return false;
                 const data = JSON.parse(raw);
-                if (!data || data.version !== 11) return false;
+                if (!data || data.version !== 12) return false;
 
                 balance = typeof data.balance === 'number' ? data.balance : 0;
                 openedCount = typeof data.openedCount === 'number' ? data.openedCount : 0;
