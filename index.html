@@ -106,6 +106,7 @@
         }
 
         .header {
+            position: relative;
             background: rgba(15, 18, 31, 0.9);
             border-radius: 20px;
             padding: 10px 14px;
@@ -114,9 +115,97 @@
             justify-content: space-between;
             align-items: center;
             gap: 10px;
-            border: 1px solid #2c3248;
+            border: 2px solid #6b7280;
             box-shadow: inset 0 0 15px #00000066;
-            min-height: 56px;
+            min-height: 66px;
+            transition: box-shadow 0.4s ease, border-color 0.4s ease, filter 0.4s ease;
+        }
+
+        /* ===== РАМКИ УРОВНЕЙ ===== */
+        .header.frame-1 {
+            border: 2px solid #6b7280;
+            box-shadow: inset 0 0 15px #00000066, 0 0 15px #6b728066;
+        }
+
+        .header.frame-2 {
+            border: 2px solid #cd7f32;
+            box-shadow: inset 0 0 15px #00000066, 0 0 20px #cd7f3266;
+        }
+
+        .header.frame-3 {
+            border: 2px solid #c0c0c0;
+            box-shadow: inset 0 0 15px #00000066, 0 0 25px #c0c0c099, inset 0 0 20px #c0c0c033;
+        }
+
+        .header.frame-4 {
+            border: 2px solid #ffd966;
+            box-shadow: inset 0 0 15px #00000066, 0 0 30px #ffd96699, inset 0 0 20px #ffd96633;
+            animation: framePulse 2.5s infinite alternate;
+        }
+
+        .header.frame-5 {
+            border: 2px solid #50c878;
+            box-shadow: inset 0 0 15px #00000066, 0 0 35px #50c878aa, inset 0 0 25px #50c87844;
+            animation: framePulse 2.2s infinite alternate;
+        }
+
+        .header.frame-6 {
+            border: 2px solid #ff4d6d;
+            box-shadow: inset 0 0 15px #00000066, 0 0 40px #ff4d6dcc, inset 0 0 30px #ff4d6d55;
+            animation: framePulse 2s infinite alternate;
+        }
+
+        .header.frame-7 {
+            border: 2px solid #b366ff;
+            box-shadow: inset 0 0 15px #00000066, 0 0 45px #b366ffcc, inset 0 0 30px #b366ff55;
+            animation: framePulse 1.8s infinite alternate, frameHue 4s infinite linear;
+        }
+
+        .header.frame-8 {
+            border: 3px solid transparent;
+            background:
+                linear-gradient(rgba(15, 18, 31, 0.9), rgba(15, 18, 31, 0.9)) padding-box,
+                linear-gradient(90deg, #ff4d6d, #ffd966, #7ae0a0, #4dabff, #b366ff, #ff4d6d) border-box;
+            box-shadow: inset 0 0 15px #00000066, 0 0 50px #b366ffaa;
+            animation: rainbowGlow 3s infinite linear;
+        }
+
+        .header.frame-9 {
+            border: 3px solid transparent;
+            background:
+                linear-gradient(rgba(15, 18, 31, 0.9), rgba(15, 18, 31, 0.9)) padding-box,
+                linear-gradient(90deg, #00d4ff, #7ae0a0, #ffd966, #00d4ff) border-box;
+            box-shadow: inset 0 0 15px #00000066, 0 0 55px #00d4ffcc, inset 0 0 25px #00d4ff44;
+            animation: rainbowGlow 2s infinite linear, framePulse 1.5s infinite alternate;
+        }
+
+        .header.frame-10 {
+            border: 4px solid transparent;
+            background:
+                linear-gradient(rgba(15, 18, 31, 0.9), rgba(15, 18, 31, 0.9)) padding-box,
+                linear-gradient(135deg, #ffd966, #ff4d6d, #b366ff, #ffd966) border-box;
+            box-shadow:
+                inset 0 0 15px #00000066,
+                0 0 60px #ffd966cc,
+                0 0 90px #ff4d6d99,
+                inset 0 0 30px #ffd96655;
+            animation: rainbowGlow 1.5s infinite linear, framePulse 1.2s infinite alternate;
+        }
+
+        @keyframes framePulse {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.25); }
+        }
+
+        @keyframes frameHue {
+            from { filter: brightness(1) hue-rotate(0deg); }
+            to { filter: brightness(1.15) hue-rotate(20deg); }
+        }
+
+        @keyframes rainbowGlow {
+            0%   { filter: brightness(1) hue-rotate(0deg); }
+            50%  { filter: brightness(1.2) hue-rotate(30deg); }
+            100% { filter: brightness(1) hue-rotate(0deg); }
         }
 
         .player-info {
@@ -151,9 +240,62 @@
             text-shadow: 0 0 10px rgba(122, 224, 160, 0.5);
         }
 
+        .level-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            background: linear-gradient(135deg, #2a2310, #1e2338);
+            border: 1px solid #ffd966;
+            border-radius: 100px;
+            padding: 2px 8px;
+            font-size: clamp(0.6rem, 2.5vw, 0.7rem);
+            font-weight: 800;
+            color: #ffd966;
+            margin-left: 6px;
+            text-shadow: 0 0 6px #ffd96688;
+            box-shadow: 0 0 8px #ffd96655;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .level-badge .level-num {
+            font-size: 0.85em;
+            opacity: 0.85;
+        }
+
+        .xp-bar {
+            margin-top: 5px;
+            height: 4px;
+            background: #1e2338;
+            border-radius: 100px;
+            overflow: hidden;
+            box-shadow: inset 0 0 5px #00000088;
+        }
+
+        .xp-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7ae0a0, #ffd966);
+            border-radius: 100px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 8px #ffd96699;
+            width: 0%;
+        }
+
+        .xp-text {
+            font-size: clamp(0.55rem, 2.3vw, 0.65rem);
+            color: #7b85a0;
+            margin-top: 2px;
+            font-weight: 700;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         .header-actions {
             display: flex;
             gap: 6px;
+            flex-shrink: 0;
         }
 
         .icon-btn {
@@ -491,6 +633,8 @@
         .log-item.achievement .name { color: #ffd966; font-weight: 800; }
         .log-item.boost { background: linear-gradient(90deg, #1a3a1a, transparent); }
         .log-item.boost .name { color: #7ae0a0; font-weight: 800; }
+        .log-item.level { background: linear-gradient(90deg, #3a1f5c, transparent); }
+        .log-item.level .name { color: #b366ff; font-weight: 800; }
 
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(-8px); }
@@ -1388,6 +1532,19 @@
             100% { opacity: 0; transform: translate(-50%, -50%) translateY(-50px); }
         }
 
+        .floating-xp {
+            position: fixed;
+            color: #b366ff;
+            font-weight: 800;
+            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            text-shadow: 0 0 10px #b366ff;
+            pointer-events: none;
+            z-index: 999;
+            transform: translate(-50%, -50%);
+            animation: floatUp 0.65s ease-out forwards;
+            will-change: transform, opacity;
+        }
+
         .save-indicator {
             position: fixed;
             bottom: calc(8px + env(safe-area-inset-bottom));
@@ -1432,7 +1589,8 @@
             .container-btn.mythic,
             .boost-chip,
             .tap-multiplier,
-            .shop-item.active-boost .shop-item-icon {
+            .shop-item.active-boost .shop-item-icon,
+            .header[class*="frame-"] {
                 animation: none !important;
             }
             .modal-card.jackpot {
@@ -1455,15 +1613,23 @@
 </head>
 <body>
 <div class="game" id="game">
-    <div class="header">
+    <div class="header frame-1" id="headerFrame">
         <div class="player-info">
             <div class="player-name" id="playerNameDisplay">
                 <span id="playerNameText">Игрок</span>
+                <span class="level-badge" id="levelBadge">
+                    <span id="levelIcon">🥉</span>
+                    <span class="level-num" id="levelNum">Ур. 1</span>
+                </span>
                 <span class="edit-icon">✏️</span>
             </div>
             <div class="player-balance">
                 <span id="balanceDisplay">0</span> <span style="font-size:0.7em; color:#a0a8c0;">$</span>
             </div>
+            <div class="xp-bar">
+                <div class="xp-bar-fill" id="xpBarFill" style="width: 0%;"></div>
+            </div>
+            <div class="xp-text" id="xpText">0 / 100 XP</div>
         </div>
         <div class="header-actions">
             <button class="icon-btn" id="shopBtn" title="Магазин">
@@ -1474,12 +1640,11 @@
         </div>
     </div>
 
-    <!-- Панель активных бустов -->
     <div class="active-boosts" id="activeBoostsPanel"></div>
 
     <div class="info-row">
         <div class="info-badge">👆 <span data-i18n="tap">Тап</span>: <b id="tapValueDisplay">+1 $</b></div>
-        <div class="info-badge" id="achBtn">🏅 <b id="achCounter">0/12</b></div>
+        <div class="info-badge" id="achBtn">🏅 <b id="achCounter">0/25</b></div>
     </div>
 
     <div class="tap-area" id="tapArea">
@@ -1514,7 +1679,7 @@
         </button>
         <button class="container-btn mythic" id="mythicBtn" data-type="mythic">
             <div class="title">✦ <span data-i18n="container_mythic">Мифический</span> ✦</div>
-            <div class="price">💵 5 000 000</div>
+            <div class="price">💵 1 000 000</div>
             <div class="car-count">15 <span data-i18n="cars">авто</span></div>
             <div class="jackpot">👑 KOENIGSEGG</div>
         </button>
@@ -1565,7 +1730,7 @@
 <div class="modal ach-modal" id="achModal">
     <div class="modal-card">
         <div class="garage-title">🏅 <span data-i18n="achievements">Достижения</span></div>
-        <div class="ach-progress"><span data-i18n="unlocked">Открыто</span>: <b id="achProgressText">0 / 12</b></div>
+        <div class="ach-progress"><span data-i18n="unlocked">Открыто</span>: <b id="achProgressText">0 / 25</b></div>
         <div class="ach-list" id="achList"></div>
         <button class="garage-close" id="achCloseBtn" data-i18n="close">Закрыть</button>
     </div>
@@ -1632,9 +1797,9 @@
     (function() {
         'use strict';
 
-        const SAVE_KEY = 'carTapGame_v5'; // v5 — финальная с бустами
+        const SAVE_KEY = 'carTapGame_v10'; // v10 — с уровнями
         const SELL_RATE = 0.25;
-        const JACKPOT_SELL_RATE = 1.0;
+        const JACKPOT_SELL_RATE = 2.5;
         const BASE_TAP_VALUE = 1;
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -1660,8 +1825,8 @@
                 rarity_common: 'Обычная', rarity_rare: 'Редкая', rarity_epic: 'Эпическая',
                 rarity_legendary: 'Легендарная', rarity_mythic: 'МИФИЧЕСКАЯ',
                 sell_warning: '⚠️ Скупщик даёт только 25%',
-                sell_warning_jackpot: '✨ ДЖЕКПОТ продаётся за 100% стоимости! ✨',
-                jackpot_banner: '🎰 ДЖЕКПОТ 🎰', pct: '25%', pct_full: '100%',
+                sell_warning_jackpot: '✨ ДЖЕКПОТ продаётся за 250% стоимости! ✨',
+                jackpot_banner: '🎰 ДЖЕКПОТ 🎰', pct: '25%', pct_full: '250%',
                 ach_first_car: 'Первая машина', ach_first_car_desc: 'Открой свой первый контейнер',
                 ach_first_expensive: 'Первый дорогой', ach_first_expensive_desc: 'Получи машину дороже 100 000 $',
                 ach_jackpot_common: 'Джекпот: BMW', ach_jackpot_common_desc: 'Выбей BMW из обычного',
@@ -1674,13 +1839,27 @@
                 ach_millionaire: 'Миллионер', ach_millionaire_desc: 'Накопи 1 000 000 $',
                 ach_garage_50: 'Автолегенда', ach_garage_50_desc: 'Собери 50 машин в гараже',
                 ach_jackpot_all: 'Все джекпоты!', ach_jackpot_all_desc: 'Выбей все 5 джекпотов',
+                ach_rarity_common: 'Обычная коллекция', ach_rarity_common_desc: '50 обычных машин в гараже',
+                ach_rarity_rare: 'Синяя коллекция', ach_rarity_rare_desc: '25 редких машин в гараже',
+                ach_rarity_epic: 'Фиолетовая коллекция', ach_rarity_epic_desc: '10 эпических машин в гараже',
+                ach_rarity_legendary: 'Красная коллекция', ach_rarity_legendary_desc: '5 легендарных машин в гараже',
+                ach_rarity_mythic: 'Мифическая коллекция', ach_rarity_mythic_desc: '3 мифические машины в гараже',
+                ach_rarity_all: 'Радужная коллекция', ach_rarity_all_desc: 'По 10 машин каждой редкости',
+                ach_epic_billionaire: 'Космический капитал', ach_epic_billionaire_desc: 'Накопи 100 000 000 $',
+                ach_epic_road_king: 'Король дорог', ach_epic_road_king_desc: 'Все джекпоты + 100 машин в гараже',
+                ach_epic_perfectionist: 'Перфекционист', ach_epic_perfectionist_desc: 'Открой все остальные достижения',
+                ach_epic_diamond: 'Алмазный игрок', ach_epic_diamond_desc: '10 000 000 $ + 50 машин + 10 джекпотов',
+                ach_epic_ideal_garage: 'Идеальный гараж', ach_epic_ideal_garage_desc: 'Собери все 75 машин',
+                ach_all_jackpots_x2: 'Все джекпоты x2', ach_all_jackpots_x2_desc: 'Поймай каждый джекпот 2 раза',
+                ach_all_containers: 'Все виды', ach_all_containers_desc: 'Открой по 1 контейнеру каждого типа',
                 shop: 'Магазин', balance_short: 'Баланс', buy: 'Купить',
                 active_label: '✓ Активно',
-                boost_x2_name: 'x2 к тапу', boost_x2_desc: 'Удваивает деньги за тап',
-                boost_x3_name: 'x3 к тапу', boost_x3_desc: 'Утраивает деньги за тап',
-                boost_x5_name: 'x5 к тапу', boost_x5_desc: 'Пятикратный доход за тап',
-                boost_auto_name: 'Авто-тап', boost_auto_desc: 'Автоматически тапает 5 раз/сек',
-                boost_lucky_name: 'Удача', boost_lucky_desc: 'Удваивает шанс на джекпот',
+                boost_x2_name: 'x2 к тапу', boost_x2_desc: 'Удваивает деньги за тап (120 сек)',
+                boost_x3_name: 'x3 к тапу', boost_x3_desc: 'Утраивает деньги за тап (120 сек)',
+                boost_x5_name: 'x5 к тапу', boost_x5_desc: 'Пятикратный доход за тап (180 сек)',
+                boost_auto_name: 'Авто-тап', boost_auto_desc: 'Автоматически тапает 10 раз/сек',
+                boost_lucky_name: 'Удача x2', boost_lucky_desc: 'Удваивает шанс на джекпот',
+                boost_lucky_x5_name: 'Удача x3', boost_lucky_x5_desc: 'Утраивает шанс на джекпот',
                 boost_buy_success: 'Улучшение куплено!',
                 boost_not_enough: 'Недостаточно денег',
                 boost_already_active: 'Уже активно',
@@ -1688,7 +1867,9 @@
                 boost_expired: 'Улучшение закончилось',
                 tap_value: 'Тап',
                 min: 'мин',
-                sec: 'сек'
+                sec: 'сек',
+                level_up: 'НОВЫЙ УРОВЕНЬ!',
+                level: 'Уровень'
             },
             en: {
                 nickname: 'Nickname', language: 'Language', settings: 'Settings',
@@ -1710,8 +1891,8 @@
                 rarity_common: 'Common', rarity_rare: 'Rare', rarity_epic: 'Epic',
                 rarity_legendary: 'Legendary', rarity_mythic: 'MYTHIC',
                 sell_warning: '⚠️ Dealer pays only 25%',
-                sell_warning_jackpot: '✨ JACKPOT sells for 100%! ✨',
-                jackpot_banner: '🎰 JACKPOT 🎰', pct: '25%', pct_full: '100%',
+                sell_warning_jackpot: '✨ JACKPOT sells for 250%! ✨',
+                jackpot_banner: '🎰 JACKPOT 🎰', pct: '25%', pct_full: '250%',
                 ach_first_car: 'First car', ach_first_car_desc: 'Open your first container',
                 ach_first_expensive: 'First expensive', ach_first_expensive_desc: 'Get a car worth over 100 000 $',
                 ach_jackpot_common: 'Jackpot: BMW', ach_jackpot_common_desc: 'Get BMW from common',
@@ -1724,13 +1905,27 @@
                 ach_millionaire: 'Millionaire', ach_millionaire_desc: 'Accumulate 1 000 000 $',
                 ach_garage_50: 'Auto legend', ach_garage_50_desc: 'Collect 50 cars in garage',
                 ach_jackpot_all: 'All jackpots!', ach_jackpot_all_desc: 'Get all 5 jackpots',
+                ach_rarity_common: 'Common collection', ach_rarity_common_desc: '50 common cars in garage',
+                ach_rarity_rare: 'Blue collection', ach_rarity_rare_desc: '25 rare cars in garage',
+                ach_rarity_epic: 'Purple collection', ach_rarity_epic_desc: '10 epic cars in garage',
+                ach_rarity_legendary: 'Red collection', ach_rarity_legendary_desc: '5 legendary cars in garage',
+                ach_rarity_mythic: 'Mythic collection', ach_rarity_mythic_desc: '3 mythic cars in garage',
+                ach_rarity_all: 'Rainbow collection', ach_rarity_all_desc: '10 cars of each rarity',
+                ach_epic_billionaire: 'Cosmic capital', ach_epic_billionaire_desc: 'Accumulate 100 000 000 $',
+                ach_epic_road_king: 'Road king', ach_epic_road_king_desc: 'All jackpots + 100 cars in garage',
+                ach_epic_perfectionist: 'Perfectionist', ach_epic_perfectionist_desc: 'Unlock all other achievements',
+                ach_epic_diamond: 'Diamond player', ach_epic_diamond_desc: '10 000 000 $ + 50 cars + 10 jackpots',
+                ach_epic_ideal_garage: 'Ideal garage', ach_epic_ideal_garage_desc: 'Collect all 75 cars',
+                ach_all_jackpots_x2: 'All jackpots x2', ach_all_jackpots_x2_desc: 'Catch each jackpot 2 times',
+                ach_all_containers: 'All types', ach_all_containers_desc: 'Open 1 container of each type',
                 shop: 'Shop', balance_short: 'Balance', buy: 'Buy',
                 active_label: '✓ Active',
-                boost_x2_name: 'x2 tap', boost_x2_desc: 'Doubles money per tap',
-                boost_x3_name: 'x3 tap', boost_x3_desc: 'Triples money per tap',
-                boost_x5_name: 'x5 tap', boost_x5_desc: '5x money per tap',
-                boost_auto_name: 'Auto-tap', boost_auto_desc: 'Automatically taps 5/s',
-                boost_lucky_name: 'Lucky', boost_lucky_desc: 'Doubles jackpot chance',
+                boost_x2_name: 'x2 tap', boost_x2_desc: 'Doubles money per tap (120s)',
+                boost_x3_name: 'x3 tap', boost_x3_desc: 'Triples money per tap (120s)',
+                boost_x5_name: 'x5 tap', boost_x5_desc: '5x money per tap (180s)',
+                boost_auto_name: 'Auto-tap', boost_auto_desc: 'Automatically taps 10/s',
+                boost_lucky_name: 'Lucky x2', boost_lucky_desc: 'Doubles jackpot chance',
+                boost_lucky_x5_name: 'Lucky x3', boost_lucky_x5_desc: 'Triples jackpot chance',
                 boost_buy_success: 'Boost purchased!',
                 boost_not_enough: 'Not enough money',
                 boost_already_active: 'Already active',
@@ -1738,7 +1933,9 @@
                 boost_expired: 'Boost expired',
                 tap_value: 'Tap',
                 min: 'min',
-                sec: 'sec'
+                sec: 'sec',
+                level_up: 'LEVEL UP!',
+                level: 'Level'
             }
         };
 
@@ -1748,13 +1945,42 @@
             return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) || TRANSLATIONS.ru[key] || key;
         }
 
+        // ================== УРОВНИ ==================
+        const LEVELS = [
+            { level: 1,  xpRequired: 0,           nameRu: 'Новичок',    nameEn: 'Novice',      icon: '🥉' },
+            { level: 2,  xpRequired: 100,         nameRu: 'Любитель',   nameEn: 'Amateur',     icon: '🥈' },
+            { level: 3,  xpRequired: 500,         nameRu: 'Знаток',     nameEn: 'Adept',       icon: '🥇' },
+            { level: 4,  xpRequired: 2_000,       nameRu: 'Эксперт',    nameEn: 'Expert',      icon: '💎' },
+            { level: 5,  xpRequired: 10_000,      nameRu: 'Мастер',     nameEn: 'Master',      icon: '👑' },
+            { level: 6,  xpRequired: 50_000,      nameRu: 'Гуру',       nameEn: 'Guru',        icon: '🔥' },
+            { level: 7,  xpRequired: 200_000,     nameRu: 'Легенда',    nameEn: 'Legend',      icon: '⚡' },
+            { level: 8,  xpRequired: 1_000_000,   nameRu: 'Миф',        nameEn: 'Myth',        icon: '🌟' },
+            { level: 9,  xpRequired: 5_000_000,   nameRu: 'Космос',     nameEn: 'Cosmos',      icon: '🚀' },
+            { level: 10, xpRequired: 20_000_000,  nameRu: 'БОГ',        nameEn: 'GOD',         icon: '💠' }
+        ];
+
+        function getLevelFromXP(xp) {
+            let current = LEVELS[0];
+            for (const lvl of LEVELS) {
+                if (xp >= lvl.xpRequired) current = lvl;
+                else break;
+            }
+            return current;
+        }
+
+        function getNextLevel(currentLevelObj) {
+            const idx = LEVELS.findIndex(l => l.level === currentLevelObj.level);
+            return idx >= 0 && idx < LEVELS.length - 1 ? LEVELS[idx + 1] : null;
+        }
+
         // ================== БУСТЫ ==================
         const BOOSTS = [
-            { id: 'tap_x2', icon: '⚡', nameKey: 'boost_x2_name', descKey: 'boost_x2_desc', price: 500, duration: 60, type: 'multiplier', value: 2 },
-            { id: 'tap_x3', icon: '🔥', nameKey: 'boost_x3_name', descKey: 'boost_x3_desc', price: 5_000, duration: 60, type: 'multiplier', value: 3 },
-            { id: 'tap_x5', icon: '💥', nameKey: 'boost_x5_name', descKey: 'boost_x5_desc', price: 50_000, duration: 60, type: 'multiplier', value: 5 },
-            { id: 'auto_tap', icon: '🤖', nameKey: 'boost_auto_name', descKey: 'boost_auto_desc', price: 10_000, duration: 120, type: 'auto', value: 5 },
-            { id: 'lucky', icon: '🍀', nameKey: 'boost_lucky_name', descKey: 'boost_lucky_desc', price: 25_000, duration: 120, type: 'lucky', value: 2 }
+            { id: 'tap_x2', icon: '⚡', nameKey: 'boost_x2_name', descKey: 'boost_x2_desc', price: 100, duration: 120, type: 'multiplier', value: 2 },
+            { id: 'tap_x3', icon: '🔥', nameKey: 'boost_x3_name', descKey: 'boost_x3_desc', price: 1_000, duration: 120, type: 'multiplier', value: 3 },
+            { id: 'tap_x5', icon: '💥', nameKey: 'boost_x5_name', descKey: 'boost_x5_desc', price: 5_000, duration: 180, type: 'multiplier', value: 5 },
+            { id: 'auto_tap', icon: '🤖', nameKey: 'boost_auto_name', descKey: 'boost_auto_desc', price: 2_000, duration: 180, type: 'auto', value: 10 },
+            { id: 'lucky', icon: '🍀', nameKey: 'boost_lucky_name', descKey: 'boost_lucky_desc', price: 3_000, duration: 180, type: 'lucky', value: 2 },
+            { id: 'lucky_x5', icon: '🌟', nameKey: 'boost_lucky_x5_name', descKey: 'boost_lucky_x5_desc', price: 10_000, duration: 180, type: 'lucky', value: 3 }
         ];
 
         // ================== АВТОМОБИЛИ ==================
@@ -1831,24 +2057,24 @@
         ];
 
         const mythicCars = [
-            { name: 'Lamborghini Huracan', price: 450_000, emoji: '🏎️', rarity: 'rare', chance: 15 },
-            { name: 'Ferrari F8 Tributo', price: 500_000, emoji: '🏎️', rarity: 'rare', chance: 13 },
-            { name: 'McLaren 720S', price: 480_000, emoji: '🏎️', rarity: 'rare', chance: 12 },
-            { name: 'Aston Martin DB11', price: 420_000, emoji: '🏎️', rarity: 'epic', chance: 10 },
-            { name: 'Lamborghini Aventador', price: 550_000, emoji: '🏎️', rarity: 'rare', chance: 8 },
-            { name: 'Porsche 918 Spyder', price: 900_000, emoji: '🏎️', rarity: 'epic', chance: 7 },
-            { name: 'Ferrari 812 Superfast', price: 600_000, emoji: '🏎️', rarity: 'epic', chance: 6 },
-            { name: 'Rolls-Royce Ghost', price: 700_000, emoji: '👑', rarity: 'epic', chance: 5 },
-            { name: 'Rolls-Royce Wraith', price: 650_000, emoji: '👑', rarity: 'epic', chance: 4 },
-            { name: 'Bugatti Veyron', price: 1_800_000, emoji: '🏎️', rarity: 'legendary', chance: 4 },
-            { name: 'Pagani Huayra', price: 2_400_000, emoji: '🏎️', rarity: 'legendary', chance: 3 },
-            { name: 'Koenigsegg Agera', price: 2_800_000, emoji: '🏎️', rarity: 'legendary', chance: 2 },
-            { name: 'McLaren P1', price: 1_500_000, emoji: '🏎️', rarity: 'legendary', chance: 2 },
-            { name: 'Lamborghini Veneno', price: 3_500_000, emoji: '🏎️', rarity: 'mythic', chance: 1.5 },
-            { name: 'Koenigsegg Jesko', price: 4_500_000, emoji: '👑', rarity: 'mythic', chance: 0.5, jackpot: true }
+            { name: 'Lamborghini Huracan', price: 90_000, emoji: '🏎️', rarity: 'rare', chance: 15 },
+            { name: 'Ferrari F8 Tributo', price: 100_000, emoji: '🏎️', rarity: 'rare', chance: 13 },
+            { name: 'McLaren 720S', price: 95_000, emoji: '🏎️', rarity: 'rare', chance: 12 },
+            { name: 'Aston Martin DB11', price: 85_000, emoji: '🏎️', rarity: 'epic', chance: 10 },
+            { name: 'Lamborghini Aventador', price: 110_000, emoji: '🏎️', rarity: 'rare', chance: 8 },
+            { name: 'Porsche 918 Spyder', price: 180_000, emoji: '🏎️', rarity: 'epic', chance: 7 },
+            { name: 'Ferrari 812 Superfast', price: 120_000, emoji: '🏎️', rarity: 'epic', chance: 6 },
+            { name: 'Rolls-Royce Ghost', price: 140_000, emoji: '👑', rarity: 'epic', chance: 5 },
+            { name: 'Rolls-Royce Wraith', price: 130_000, emoji: '👑', rarity: 'epic', chance: 4 },
+            { name: 'Bugatti Veyron', price: 350_000, emoji: '🏎️', rarity: 'legendary', chance: 4 },
+            { name: 'Pagani Huayra', price: 480_000, emoji: '🏎️', rarity: 'legendary', chance: 3 },
+            { name: 'Koenigsegg Agera', price: 560_000, emoji: '🏎️', rarity: 'legendary', chance: 2 },
+            { name: 'McLaren P1', price: 300_000, emoji: '🏎️', rarity: 'legendary', chance: 2 },
+            { name: 'Lamborghini Veneno', price: 700_000, emoji: '🏎️', rarity: 'mythic', chance: 1.5 },
+            { name: 'Koenigsegg Jesko', price: 900_000, emoji: '👑', rarity: 'mythic', chance: 0.5, jackpot: true }
         ];
 
-        // ================== ДОСТИЖЕНИЯ ==================
+        // ================== ДОСТИЖЕНИЯ (25) ==================
         const achievements = [
             { id: 'first_car', icon: '🚗', nameKey: 'ach_first_car', descKey: 'ach_first_car_desc' },
             { id: 'first_expensive', icon: '💎', nameKey: 'ach_first_expensive', descKey: 'ach_first_expensive_desc' },
@@ -1861,7 +2087,20 @@
             { id: 'garage_20', icon: '🏛️', nameKey: 'ach_garage_20', descKey: 'ach_garage_20_desc' },
             { id: 'garage_50', icon: '🏆', nameKey: 'ach_garage_50', descKey: 'ach_garage_50_desc' },
             { id: 'millionaire', icon: '💰', nameKey: 'ach_millionaire', descKey: 'ach_millionaire_desc' },
-            { id: 'jackpot_all', icon: '👑', nameKey: 'ach_jackpot_all', descKey: 'ach_jackpot_all_desc' }
+            { id: 'jackpot_all', icon: '👑', nameKey: 'ach_jackpot_all', descKey: 'ach_jackpot_all_desc' },
+            { id: 'rarity_common', icon: '⚪', nameKey: 'ach_rarity_common', descKey: 'ach_rarity_common_desc' },
+            { id: 'rarity_rare', icon: '🔵', nameKey: 'ach_rarity_rare', descKey: 'ach_rarity_rare_desc' },
+            { id: 'rarity_epic', icon: '🟣', nameKey: 'ach_rarity_epic', descKey: 'ach_rarity_epic_desc' },
+            { id: 'rarity_legendary', icon: '🔴', nameKey: 'ach_rarity_legendary', descKey: 'ach_rarity_legendary_desc' },
+            { id: 'rarity_mythic', icon: '👑', nameKey: 'ach_rarity_mythic', descKey: 'ach_rarity_mythic_desc' },
+            { id: 'rarity_all', icon: '🌈', nameKey: 'ach_rarity_all', descKey: 'ach_rarity_all_desc' },
+            { id: 'epic_billionaire', icon: '🚀', nameKey: 'ach_epic_billionaire', descKey: 'ach_epic_billionaire_desc' },
+            { id: 'epic_road_king', icon: '👑', nameKey: 'ach_epic_road_king', descKey: 'ach_epic_road_king_desc' },
+            { id: 'epic_perfectionist', icon: '🌟', nameKey: 'ach_epic_perfectionist', descKey: 'ach_epic_perfectionist_desc' },
+            { id: 'epic_diamond', icon: '💎', nameKey: 'ach_epic_diamond', descKey: 'ach_epic_diamond_desc' },
+            { id: 'epic_ideal_garage', icon: '🏆', nameKey: 'ach_epic_ideal_garage', descKey: 'ach_epic_ideal_garage_desc' },
+            { id: 'all_jackpots_x2', icon: '🎰', nameKey: 'ach_all_jackpots_x2', descKey: 'ach_all_jackpots_x2_desc' },
+            { id: 'all_containers', icon: '🎯', nameKey: 'ach_all_containers', descKey: 'ach_all_containers_desc' }
         ];
 
         // ================== СОСТОЯНИЕ ==================
@@ -1873,9 +2112,13 @@
         let carIdCounter = 0;
         let unlockedAchievements = new Set();
         let nickname = 'Игрок';
-        let activeBoosts = {};      // объект: { boostId: { endTime, purchasedAt } }
+        let activeBoosts = {};
         let autoTapTimer = null;
         let boostTickTimer = null;
+        let jackpotCounts = {};
+        let openedByType = { common: 0, rare: 0, epic: 0, legendary: 0, mythic: 0 };
+        let xp = 0;
+        let currentLevel = 1;
 
         // ================== DOM ==================
         const $ = id => document.getElementById(id);
@@ -1931,7 +2174,14 @@
         const shopList = $('shopList');
         const shopBalance = $('shopBalance');
         const boostBadge = $('boostBadge');
-        const activeBoostsPanel = $('activeBoostsPanel');  // ⚠️ ПЕРЕИМЕНОВАНО!
+        const activeBoostsPanel = $('activeBoostsPanel');
+
+        const headerFrame = $('headerFrame');
+        const levelBadge = $('levelBadge');
+        const levelIcon = $('levelIcon');
+        const levelNum = $('levelNum');
+        const xpBarFill = $('xpBarFill');
+        const xpText = $('xpText');
 
         const containerButtons = {
             common: $('commonBtn'),
@@ -1946,7 +2196,7 @@
             rare:      { price: 15_000,     cars: rareCars },
             epic:      { price: 50_000,     cars: epicCars },
             legendary: { price: 500_000,    cars: legendaryCars },
-            mythic:    { price: 5_000_000,  cars: mythicCars }
+            mythic:    { price: 1_000_000,  cars: mythicCars }
         };
 
         // ================== СОХРАНЕНИЕ ==================
@@ -1976,7 +2226,7 @@
                 });
 
                 const data = {
-                    version: 5,
+                    version: 10,
                     balance: balance,
                     openedCount: openedCount,
                     garage: garage,
@@ -1985,6 +2235,10 @@
                     nickname: nickname,
                     lang: currentLang,
                     activeBoosts: boostsToSave,
+                    jackpotCounts: jackpotCounts,
+                    openedByType: openedByType,
+                    xp: xp,
+                    currentLevel: currentLevel,
                     timestamp: now
                 };
                 localStorage.setItem(SAVE_KEY, JSON.stringify(data));
@@ -2026,7 +2280,7 @@
                 const raw = localStorage.getItem(SAVE_KEY);
                 if (!raw) return false;
                 const data = JSON.parse(raw);
-                if (!data || data.version !== 5) return false;
+                if (!data || data.version !== 10) return false;
 
                 balance = typeof data.balance === 'number' ? data.balance : 0;
                 openedCount = typeof data.openedCount === 'number' ? data.openedCount : 0;
@@ -2046,6 +2300,14 @@
                         }
                     });
                 }
+
+                jackpotCounts = (data.jackpotCounts && typeof data.jackpotCounts === 'object') ? data.jackpotCounts : {};
+                openedByType = (data.openedByType && typeof data.openedByType === 'object')
+                    ? { common: 0, rare: 0, epic: 0, legendary: 0, mythic: 0, ...data.openedByType }
+                    : { common: 0, rare: 0, epic: 0, legendary: 0, mythic: 0 };
+
+                xp = typeof data.xp === 'number' ? data.xp : 0;
+                currentLevel = typeof data.currentLevel === 'number' ? data.currentLevel : 1;
 
                 return true;
             } catch (e) {
@@ -2077,7 +2339,98 @@
             return Math.floor(car.price * getSellRate(car));
         }
 
-        // ================== БУСТЫ (логика) ==================
+        // ================== УРОВНИ ==================
+        function addXP(amount) {
+            if (amount <= 0) return;
+            xp += amount;
+            const newLevel = getLevelFromXP(xp);
+            if (newLevel.level > currentLevel) {
+                currentLevel = newLevel.level;
+                levelUpAnimation(newLevel);
+            }
+            updateLevelUI();
+            scheduleSave(500);
+        }
+
+        function updateLevelUI() {
+            const lvl = getLevelFromXP(xp);
+            const next = getNextLevel(lvl);
+
+            levelIcon.textContent = lvl.icon;
+            levelNum.textContent = 'Ур. ' + lvl.level;
+
+            if (next) {
+                const currentLevelXP = lvl.xpRequired;
+                const nextLevelXP = next.xpRequired;
+                const range = nextLevelXP - currentLevelXP;
+                const progress = xp - currentLevelXP;
+                const percent = Math.min(100, Math.max(0, (progress / range) * 100));
+                xpBarFill.style.width = percent + '%';
+                xpText.textContent = `${fmt(xp - currentLevelXP)} / ${fmt(range)} XP`;
+            } else {
+                xpBarFill.style.width = '100%';
+                xpText.textContent = `MAX · ${fmt(xp)} XP`;
+            }
+
+            updateHeaderFrame(lvl.level);
+
+            const levelName = currentLang === 'ru' ? lvl.nameRu : lvl.nameEn;
+            levelBadge.title = `${lvl.icon} ${levelName} (Ур. ${lvl.level})`;
+        }
+
+        function updateHeaderFrame(level) {
+            for (let i = 1; i <= 10; i++) {
+                headerFrame.classList.remove('frame-' + i);
+            }
+            headerFrame.classList.add('frame-' + level);
+        }
+
+        function levelUpAnimation(lvl) {
+            vibrate([50, 30, 50, 30, 100]);
+            try {
+                playLevelUpSound();
+            } catch (e) {}
+
+            const levelName = currentLang === 'ru' ? lvl.nameRu : lvl.nameEn;
+            showToast({
+                icon: lvl.icon,
+                name: t('level_up') + ' ' + lvl.level,
+                desc: levelName,
+                isSimple: true
+            });
+
+            const logItem = document.createElement('div');
+            logItem.className = 'log-item level';
+            logItem.innerHTML = `<span class="name">${lvl.icon} ${t('level')} ${lvl.level} — ${levelName}</span><span class="price" style="color:#b366ff">⭐</span>`;
+            logContainer.prepend(logItem);
+            while (logContainer.children.length > 15) {
+                logContainer.removeChild(logContainer.lastChild);
+            }
+        }
+
+        function playLevelUpSound() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            const ctx = new AudioContext();
+            const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+            notes.forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.value = freq;
+                const startTime = ctx.currentTime + i * 0.08;
+                gain.gain.setValueAtTime(0, startTime);
+                gain.gain.linearRampToValueAtTime(0.12, startTime + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.35);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(startTime);
+                osc.stop(startTime + 0.35);
+            });
+            setTimeout(() => ctx.close(), 2000);
+        }
+
+        // ================== БУСТЫ ==================
         function getTapMultiplier() {
             let multiplier = 1;
             BOOSTS.forEach(boost => {
@@ -2094,12 +2447,20 @@
             return BASE_TAP_VALUE * getTapMultiplier();
         }
 
-        function hasAutoTap() {
-            return activeBoosts.auto_tap && activeBoosts.auto_tap.endTime > Date.now();
+        function getLuckyMultiplier() {
+            let mult = 1;
+            BOOSTS.forEach(boost => {
+                if (boost.type === 'lucky' && activeBoosts[boost.id]) {
+                    if (activeBoosts[boost.id].endTime > Date.now()) {
+                        mult = Math.max(mult, boost.value);
+                    }
+                }
+            });
+            return mult;
         }
 
-        function hasLuckyBoost() {
-            return activeBoosts.lucky && activeBoosts.lucky.endTime > Date.now();
+        function hasAutoTap() {
+            return activeBoosts.auto_tap && activeBoosts.auto_tap.endTime > Date.now();
         }
 
         function activateBoost(boostId) {
@@ -2138,9 +2499,10 @@
                 const value = getTapValue();
                 balance += value;
                 updateBalance();
+                addXP(1);
                 checkStateAchievements();
                 scheduleSave(2000);
-            }, 200);
+            }, 100);
         }
 
         function stopAutoTap() {
@@ -2195,7 +2557,6 @@
             const now = Date.now();
             const activeIds = Object.keys(activeBoosts).filter(id => activeBoosts[id].endTime > now);
 
-            // Бейдж на кнопке магазина
             if (activeIds.length > 0) {
                 boostBadge.style.display = 'block';
                 boostBadge.textContent = activeIds.length;
@@ -2203,7 +2564,6 @@
                 boostBadge.style.display = 'none';
             }
 
-            // Панель активных бустов
             activeBoostsPanel.innerHTML = '';
 
             if (activeIds.length === 0) {
@@ -2226,7 +2586,6 @@
                 });
             }
 
-            // Индикатор на тап-зоне
             const mult = getTapMultiplier();
             if (mult > 1) {
                 tapMultiplier.textContent = 'x' + mult;
@@ -2237,7 +2596,6 @@
                 tapArea.classList.remove('boosted');
             }
 
-            // Значение тапа
             tapValueDisplay.textContent = `+${getTapValue()} $`;
         }
 
@@ -2382,6 +2740,7 @@
             renderAchievements();
             updateNicknameDisplay();
             updateBoostUI();
+            updateLevelUI();
         }
 
         function updateNicknameDisplay() {
@@ -2641,14 +3000,14 @@
         }
 
         function getRandomCar(cars) {
-            const luckyActive = hasLuckyBoost();
+            const luckyMult = getLuckyMultiplier();
             const totalWeight = cars.reduce((sum, c) => {
-                const w = c.jackpot && luckyActive ? c.chance * 2 : c.chance;
+                const w = c.jackpot ? c.chance * luckyMult : c.chance;
                 return sum + w;
             }, 0);
             let random = Math.random() * totalWeight;
             for (const car of cars) {
-                const w = car.jackpot && luckyActive ? car.chance * 2 : car.chance;
+                const w = car.jackpot ? car.chance * luckyMult : car.chance;
                 if (random < w) return car;
                 random -= w;
             }
@@ -2677,6 +3036,9 @@
             balance -= price;
             updateBalance();
             openedCount++;
+            openedByType[type] = (openedByType[type] || 0) + 1;
+
+            addXP(Math.floor(price / 10));
 
             const car = getRandomCar(carsArray);
             const carCopy = { ...car, id: ++carIdCounter, fromContainer: type };
@@ -2703,10 +3065,25 @@
                 const achId = map[car.fromContainer];
                 if (achId) unlockAchievement(achId);
 
+                jackpotCounts[car.name] = (jackpotCounts[car.name] || 0) + 1;
+
                 const allJackpots = ['jackpot_common', 'jackpot_rare', 'jackpot_epic', 'jackpot_legendary', 'jackpot_mythic'];
                 if (allJackpots.every(id => unlockedAchievements.has(id))) {
                     unlockAchievement('jackpot_all');
                 }
+
+                const jackpotCarNames = ['BMW 3 Series', 'Porsche 911', 'Ferrari 488', 'Bugatti Chiron', 'Koenigsegg Jesko'];
+                const allX2 = jackpotCarNames.every(name => (jackpotCounts[name] || 0) >= 2);
+                if (allX2) {
+                    unlockAchievement('all_jackpots_x2');
+                }
+
+                addXP(1000);
+            }
+
+            const openedTypes = Object.keys(openedByType).filter(k => openedByType[k] > 0);
+            if (openedTypes.length === 5) {
+                unlockAchievement('all_containers');
             }
         }
 
@@ -2715,6 +3092,46 @@
             if (garage.length >= 5) unlockAchievement('garage_5');
             if (garage.length >= 20) unlockAchievement('garage_20');
             if (garage.length >= 50) unlockAchievement('garage_50');
+
+            const rarityCounts = { common: 0, rare: 0, epic: 0, legendary: 0, mythic: 0 };
+            garage.forEach(car => {
+                if (rarityCounts[car.rarity] !== undefined) rarityCounts[car.rarity]++;
+            });
+
+            if (rarityCounts.common >= 50) unlockAchievement('rarity_common');
+            if (rarityCounts.rare >= 25) unlockAchievement('rarity_rare');
+            if (rarityCounts.epic >= 10) unlockAchievement('rarity_epic');
+            if (rarityCounts.legendary >= 5) unlockAchievement('rarity_legendary');
+            if (rarityCounts.mythic >= 3) unlockAchievement('rarity_mythic');
+
+            const hasAllRarities = rarityCounts.common >= 10 &&
+                                   rarityCounts.rare >= 10 &&
+                                   rarityCounts.epic >= 10 &&
+                                   rarityCounts.legendary >= 10 &&
+                                   rarityCounts.mythic >= 10;
+            if (hasAllRarities) unlockAchievement('rarity_all');
+
+            if (balance >= 100_000_000) unlockAchievement('epic_billionaire');
+
+            const allJackpots = ['jackpot_common', 'jackpot_rare', 'jackpot_epic', 'jackpot_legendary', 'jackpot_mythic'];
+            if (allJackpots.every(id => unlockedAchievements.has(id)) && garage.length >= 100) {
+                unlockAchievement('epic_road_king');
+            }
+
+            const totalJackpots = Object.values(jackpotCounts).reduce((sum, c) => sum + c, 0);
+            if (balance >= 10_000_000 && garage.length >= 50 && totalJackpots >= 10) {
+                unlockAchievement('epic_diamond');
+            }
+
+            const uniqueNames = new Set(garage.map(c => c.name));
+            if (uniqueNames.size >= 75) {
+                unlockAchievement('epic_ideal_garage');
+            }
+
+            const allExceptPerfectionist = achievements.filter(a => a.id !== 'epic_perfectionist');
+            if (allExceptPerfectionist.every(a => unlockedAchievements.has(a.id))) {
+                unlockAchievement('epic_perfectionist');
+            }
         }
 
         function keepCar() {
@@ -2722,6 +3139,7 @@
             garage.push(currentCar);
             addLog(currentCar, 'garage');
             updateGarageCount();
+            addXP(10);
             hideModal();
             checkStateAchievements();
             vibrate(10);
@@ -2932,6 +3350,7 @@
             setTimeout(() => floating.remove(), 550);
 
             vibrate(8);
+            addXP(1);
             checkStateAchievements();
             scheduleSave(1500);
 
@@ -3014,6 +3433,10 @@
             unlockedAchievements = new Set();
             nickname = 'Игрок';
             activeBoosts = {};
+            jackpotCounts = {};
+            openedByType = { common: 0, rare: 0, epic: 0, legendary: 0, mythic: 0 };
+            xp = 0;
+            currentLevel = 1;
             stopAutoTap();
             if (boostTickTimer) {
                 clearInterval(boostTickTimer);
@@ -3024,6 +3447,7 @@
             updateAchCounter();
             updateNicknameDisplay();
             updateBoostUI();
+            updateLevelUI();
             nicknameInput.value = nickname;
             logContainer.innerHTML = '';
             const initLog = document.createElement('div');
@@ -3076,6 +3500,7 @@
         updateGarageCount();
         updateAchCounter();
         updateNicknameDisplay();
+        updateLevelUI();
         applyTranslations();
 
         if (Object.keys(activeBoosts).length > 0) {
@@ -3091,6 +3516,12 @@
             welcomeItem.className = 'log-item achievement';
             welcomeItem.innerHTML = `<span class="name">💾 ${t('welcome_back')} ${fmt(balance)} $</span>`;
             logContainer.appendChild(welcomeItem);
+
+            const lvl = getLevelFromXP(xp);
+            const lvlItem = document.createElement('div');
+            lvlItem.className = 'log-item level';
+            lvlItem.innerHTML = `<span class="name">${lvl.icon} ${t('level')} ${lvl.level} — ${currentLang === 'ru' ? lvl.nameRu : lvl.nameEn}</span>`;
+            logContainer.appendChild(lvlItem);
 
             if (garage.length > 0) {
                 const garageItem = document.createElement('div');
