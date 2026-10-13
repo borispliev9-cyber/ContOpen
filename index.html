@@ -332,11 +332,147 @@
             max-height: 90vh;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            position: relative;
         }
 
         @keyframes popIn {
             from { transform: scale(0.85); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
+        }
+
+        /* ===== ДЖЕКПОТ-АНИМАЦИЯ ===== */
+        .modal-card.jackpot {
+            border: 3px solid #ffd966;
+            background: linear-gradient(145deg, #3a2f10, #1b1408);
+            animation: jackpotPop 0.6s cubic-bezier(0.34, 1.6, 0.64, 1);
+            box-shadow:
+                0 0 60px #ffd966,
+                0 0 100px #ffd96666,
+                0 20px 40px black,
+                inset 0 0 40px #ffd96622;
+        }
+
+        @keyframes jackpotPop {
+            0% { transform: scale(0.3) rotate(-8deg); opacity: 0; }
+            50% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+            70% { transform: scale(0.95) rotate(-2deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* Лучи за карточкой джекпота */
+        .jackpot-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            pointer-events: none;
+            z-index: -1;
+            animation: raysRotate 8s linear infinite;
+            opacity: 0.6;
+            background:
+                conic-gradient(
+                    from 0deg,
+                    transparent 0deg, #ffd96633 15deg, transparent 30deg,
+                    transparent 60deg, #ffd96633 75deg, transparent 90deg,
+                    transparent 120deg, #ffd96633 135deg, transparent 150deg,
+                    transparent 180deg, #ffd96633 195deg, transparent 210deg,
+                    transparent 240deg, #ffd96633 255deg, transparent 270deg,
+                    transparent 300deg, #ffd96633 315deg, transparent 330deg,
+                    transparent 360deg
+                );
+            -webkit-mask-image: radial-gradient(circle, transparent 40%, black 70%);
+            mask-image: radial-gradient(circle, transparent 40%, black 70%);
+        }
+
+        @keyframes raysRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .jackpot-banner {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #8a6a15, #ffd966, #8a6a15);
+            color: #0b0e17;
+            font-weight: 900;
+            font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+            letter-spacing: 2px;
+            padding: 8px 24px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            box-shadow:
+                0 5px 0 #b38f2e,
+                0 0 25px #ffd966,
+                0 0 45px #ffd966aa;
+            animation: bannerPulse 1s ease-in-out infinite alternate;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        @keyframes bannerPulse {
+            from { transform: translateX(-50%) scale(1); }
+            to { transform: translateX(-50%) scale(1.08); }
+        }
+
+        .jackpot-star {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: starTwinkle 1.2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 10px #ffd966);
+        }
+
+        @keyframes starTwinkle {
+            0% { transform: scale(0.8) rotate(0deg); opacity: 0.7; }
+            100% { transform: scale(1.3) rotate(45deg); opacity: 1; }
+        }
+
+        .jackpot-emoji {
+            font-size: clamp(4rem, 18vw, 6rem) !important;
+            animation: jackpotBounce 0.7s cubic-bezier(0.34, 1.6, 0.64, 1) infinite alternate !important;
+            filter: drop-shadow(0 0 25px #ffd966) drop-shadow(0 0 40px #ffd96688) !important;
+        }
+
+        @keyframes jackpotBounce {
+            from { transform: translateY(0) scale(1); }
+            to { transform: translateY(-15px) scale(1.1); }
+        }
+
+        /* Конфетти */
+        .confetti-piece {
+            position: fixed;
+            width: 10px;
+            height: 14px;
+            top: -30px;
+            z-index: 250;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Вспышка при джекпоте */
+        .jackpot-flash {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle, #ffd966 0%, transparent 70%);
+            z-index: 240;
+            pointer-events: none;
+            animation: flash 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes flash {
+            0% { opacity: 0; }
+            20% { opacity: 0.9; }
+            100% { opacity: 0; }
         }
 
         .rarity-badge {
@@ -373,6 +509,11 @@
             line-height: 1.2;
         }
 
+        .modal-card.jackpot .modal-car-name {
+            color: #ffd966;
+            text-shadow: 0 0 15px #ffd966;
+        }
+
         .modal-car-price {
             font-size: clamp(1.1rem, 5vw, 1.4rem);
             font-weight: 800;
@@ -381,11 +522,25 @@
             text-shadow: 0 0 12px #7ae0a066;
         }
 
+        .modal-card.jackpot .modal-car-price {
+            color: #ffd966;
+            text-shadow: 0 0 20px #ffd966;
+        }
+
         .sell-warning {
             font-size: clamp(0.65rem, 2.8vw, 0.72rem);
             color: #ff6b6b;
             margin-bottom: 14px;
             font-weight: 600;
+        }
+
+        .sell-warning.jackpot-bonus {
+            color: #7ae0a0;
+            background: linear-gradient(90deg, #1a3a1a, #1e2338);
+            padding: 6px 10px;
+            border-radius: 12px;
+            border: 1px solid #7ae0a0;
+            font-weight: 800;
         }
 
         .modal-actions {
@@ -426,6 +581,11 @@
         .modal-btn.sell:active {
             transform: translateY(2px);
             box-shadow: 0 3px 0 #b33d66;
+        }
+
+        .modal-card.jackpot .modal-btn.sell {
+            background: linear-gradient(90deg, #7ae0a0, #ffd966);
+            box-shadow: 0 5px 0 #4a9c6a;
         }
 
         .modal-btn .sub {
@@ -500,6 +660,12 @@
         .garage-item.legendary { border-left-color: #ff4d6d; }
         .garage-item.mythic { border-left-color: #ffd966; }
 
+        .garage-item.jackpot {
+            background: linear-gradient(90deg, #2a2310, #0f121f);
+            border-left-color: #ffd966;
+            box-shadow: 0 0 12px #ffd96633;
+        }
+
         .garage-item-emoji { font-size: 1.5rem; }
 
         .garage-item-info {
@@ -514,6 +680,10 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+
+        .garage-item.jackpot .garage-item-name {
+            color: #ffd966;
         }
 
         .garage-item-price {
@@ -538,6 +708,11 @@
             touch-action: manipulation;
             min-height: 40px;
             min-width: 60px;
+        }
+
+        .garage-item-sell.jackpot {
+            background: linear-gradient(90deg, #7ae0a0, #ffd966);
+            box-shadow: 0 3px 0 #4a9c6a;
         }
 
         .garage-item-sell:active {
@@ -736,7 +911,6 @@
             100% { opacity: 0; transform: translate(-50%, -50%) translateY(-50px); }
         }
 
-        /* Мини-индикатор сохранения */
         .save-indicator {
             position: fixed;
             bottom: calc(8px + env(safe-area-inset-bottom));
@@ -776,10 +950,14 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+            .jackpot-rays,
+            .jackpot-banner,
+            .jackpot-emoji,
+            .jackpot-star {
+                animation: none !important;
+            }
+            .modal-card.jackpot {
+                animation: popIn 0.25s ease !important;
             }
         }
 
@@ -849,12 +1027,12 @@
 
 <!-- Модалка выпадения -->
 <div class="modal" id="modal">
-    <div class="modal-card">
+    <div class="modal-card" id="modalCard">
         <div class="rarity-badge common" id="modalRarity">Обычная</div>
         <div class="modal-emoji" id="modalEmoji">🚗</div>
         <div class="modal-car-name" id="modalCarName">Lada Vesta</div>
         <div class="modal-car-price" id="modalCarPrice">12 000 $</div>
-        <div class="sell-warning">⚠️ Скупщик даёт только 25%</div>
+        <div class="sell-warning" id="sellWarning">⚠️ Скупщик даёт только 25%</div>
         <div class="modal-actions">
             <button class="modal-btn keep" id="modalKeepBtn">
                 🏠 В гараж
@@ -907,7 +1085,8 @@
 
         // ================== КОНСТАНТЫ ==================
         const SAVE_KEY = 'carTapGame_v1';
-        const SELL_RATE = 0.25;
+        const SELL_RATE = 0.25;           // обычная продажа — 25%
+        const JACKPOT_SELL_RATE = 1.0;    // джекпот продаётся за 100%
         const tapValue = 1;
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -996,10 +1175,12 @@
         const tapArea = $('tapArea');
         const logContainer = $('log');
         const modal = $('modal');
+        const modalCard = $('modalCard');
         const modalRarity = $('modalRarity');
         const modalEmoji = $('modalEmoji');
         const modalCarName = $('modalCarName');
         const modalCarPrice = $('modalCarPrice');
+        const sellWarning = $('sellWarning');
         const modalKeepBtn = $('modalKeepBtn');
         const modalSellBtn = $('modalSellBtn');
         const sellPriceLabel = $('sellPriceLabel');
@@ -1050,13 +1231,11 @@
             }, 1000);
         }
 
-        // Сохранить состояние в localStorage
         function saveProgress() {
             if (saveTimer) {
                 clearTimeout(saveTimer);
                 saveTimer = null;
             }
-
             try {
                 const data = {
                     version: 1,
@@ -1070,23 +1249,19 @@
                 localStorage.setItem(SAVE_KEY, JSON.stringify(data));
                 showSaveIndicator();
             } catch (e) {
-                // localStorage может быть недоступен (приватный режим, переполнение)
                 console.warn('Не удалось сохранить прогресс:', e);
             }
         }
 
-        // Отложенное сохранение (для частых действий — тапов)
         function scheduleSave(delay = 800) {
             if (saveTimer) clearTimeout(saveTimer);
             saveTimer = setTimeout(saveProgress, delay);
         }
 
-        // Загрузить состояние из localStorage
         function loadProgress() {
             try {
                 const raw = localStorage.getItem(SAVE_KEY);
                 if (!raw) return false;
-
                 const data = JSON.parse(raw);
                 if (!data || data.version !== 1) return false;
 
@@ -1103,18 +1278,6 @@
             }
         }
 
-        // Сброс прогресса
-        function resetProgress() {
-            try {
-                localStorage.removeItem(SAVE_KEY);
-            } catch (e) {}
-            balance = 0;
-            openedCount = 0;
-            garage = [];
-            carIdCounter = 0;
-            unlockedAchievements = new Set();
-        }
-
         // ================== УТИЛИТЫ ==================
         function vibrate(pattern) {
             if (isMobile && navigator.vibrate) {
@@ -1124,6 +1287,20 @@
 
         function fmt(n) {
             return n.toLocaleString('ru-RU');
+        }
+
+        // Определяем, джекпот ли это (по полю jackpot у машины)
+        function isJackpotCar(car) {
+            return car && car.jackpot === true;
+        }
+
+        // Процент продажи: 100% для джекпота, 25% для остальных
+        function getSellRate(car) {
+            return isJackpotCar(car) ? JACKPOT_SELL_RATE : SELL_RATE;
+        }
+
+        function getSellPrice(car) {
+            return Math.floor(car.price * getSellRate(car));
         }
 
         // ================== UI ==================
@@ -1149,10 +1326,11 @@
         function addLog(car, action) {
             const logItem = document.createElement('div');
             logItem.className = 'log-item ' + car.rarity;
+            if (isJackpotCar(car)) logItem.classList.add('achievement');
 
             const nameSpan = document.createElement('span');
             nameSpan.className = 'name';
-            nameSpan.textContent = `${car.emoji} ${car.name}`;
+            nameSpan.textContent = (isJackpotCar(car) ? '🎰 ' : '') + `${car.emoji} ${car.name}`;
 
             const priceSpan = document.createElement('span');
             priceSpan.className = 'price';
@@ -1161,9 +1339,9 @@
                 priceSpan.textContent = `🏠`;
                 priceSpan.style.color = '#7ae0a0';
             } else {
-                const sellPrice = Math.floor(car.price * SELL_RATE);
+                const sellPrice = getSellPrice(car);
                 priceSpan.textContent = `+${fmt(sellPrice)} $`;
-                priceSpan.style.color = '#ff6b9d';
+                priceSpan.style.color = isJackpotCar(car) ? '#ffd966' : '#ff6b9d';
             }
 
             logItem.appendChild(nameSpan);
@@ -1214,16 +1392,161 @@
             }, 2800);
         }
 
+        // ================== АНИМАЦИЯ ДЖЕКПОТА ==================
+        function playJackpotAnimation() {
+            // 1. Вспышка
+            const flash = document.createElement('div');
+            flash.className = 'jackpot-flash';
+            document.body.appendChild(flash);
+            setTimeout(() => flash.remove(), 700);
+
+            // 2. Конфетти
+            const colors = ['#ffd966', '#ff4d6d', '#4dabff', '#b366ff', '#7ae0a0', '#ffffff'];
+            const pieces = [];
+            for (let i = 0; i < 50; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animation = `confettiFall ${2 + Math.random() * 2}s linear ${Math.random() * 0.5}s forwards`;
+                piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+                if (Math.random() > 0.5) piece.style.borderRadius = '50%';
+                piece.style.width = (6 + Math.random() * 8) + 'px';
+                piece.style.height = (8 + Math.random() * 10) + 'px';
+                document.body.appendChild(piece);
+                pieces.push(piece);
+            }
+            // Убираем конфетти через 5 сек
+            setTimeout(() => {
+                pieces.forEach(p => p.remove());
+            }, 5000);
+
+            // 3. Вибрация
+            vibrate([50, 50, 50, 50, 100, 50, 50, 50, 200]);
+
+            // 4. Звук через Web Audio (короткий "победный" сигнал)
+            try {
+                playJackpotSound();
+            } catch (e) {}
+        }
+
+        // Простой синтезированный звук джекпота через Web Audio API
+        function playJackpotSound() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            const ctx = new AudioContext();
+
+            // Аккорд: до-мажор восходящий
+            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+            notes.forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.value = freq;
+                const startTime = ctx.currentTime + i * 0.12;
+                gain.gain.setValueAtTime(0, startTime);
+                gain.gain.linearRampToValueAtTime(0.15, startTime + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.5);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(startTime);
+                osc.stop(startTime + 0.5);
+            });
+
+            // Финальный "звенящий" звук
+            const osc2 = ctx.createOscillator();
+            const gain2 = ctx.createGain();
+            osc2.type = 'sine';
+            osc2.frequency.value = 1568; // G6
+            const t = ctx.currentTime + 0.5;
+            gain2.gain.setValueAtTime(0, t);
+            gain2.gain.linearRampToValueAtTime(0.1, t + 0.02);
+            gain2.gain.exponentialRampToValueAtTime(0.001, t + 0.8);
+            osc2.connect(gain2);
+            gain2.connect(ctx.destination);
+            osc2.start(t);
+            osc2.stop(t + 0.8);
+
+            // Закрываем контекст через 2 секунды
+            setTimeout(() => ctx.close(), 2000);
+        }
+
+        // ================== МОДАЛКА МАШИНЫ ==================
+        let jackpotCleanup = null;
+
         function showCarModal(car) {
             currentCar = car;
+            const isJackpot = isJackpotCar(car);
+
+            // Сброс предыдущих джекпот-эффектов
+            if (jackpotCleanup) jackpotCleanup();
+
             modalRarity.textContent = rarityName(car.rarity);
             modalRarity.className = 'rarity-badge ' + car.rarity;
             modalEmoji.textContent = car.emoji;
             modalCarName.textContent = car.name;
             modalCarPrice.textContent = `${fmt(car.price)} $`;
 
-            const sellPrice = Math.floor(car.price * SELL_RATE);
+            const sellPrice = getSellPrice(car);
             sellPriceLabel.textContent = `+${fmt(sellPrice)} $`;
+
+            if (isJackpot) {
+                // Режим джекпота
+                modalCard.classList.add('jackpot');
+                modalEmoji.classList.add('jackpot-emoji');
+                sellWarning.classList.add('jackpot-bonus');
+                sellWarning.textContent = '✨ ДЖЕКПОТ продаётся за 100% стоимости! ✨';
+                modalSellBtn.classList.add('jackpot');
+
+                // Баннер "ДЖЕКПОТ"
+                const banner = document.createElement('div');
+                banner.className = 'jackpot-banner';
+                banner.textContent = '🎰 ДЖЕКПОТ 🎰';
+                modalCard.appendChild(banner);
+
+                // Лучи
+                const rays = document.createElement('div');
+                rays.className = 'jackpot-rays';
+                modalCard.appendChild(rays);
+
+                // Звёзды вокруг
+                const starPositions = [
+                    { top: '15%', left: '10%', delay: '0s' },
+                    { top: '25%', right: '12%', delay: '0.2s' },
+                    { bottom: '30%', left: '8%', delay: '0.4s' },
+                    { bottom: '20%', right: '10%', delay: '0.6s' },
+                    { top: '50%', left: '5%', delay: '0.3s' },
+                    { top: '45%', right: '5%', delay: '0.5s' }
+                ];
+                const stars = starPositions.map(pos => {
+                    const star = document.createElement('div');
+                    star.className = 'jackpot-star';
+                    star.textContent = '✨';
+                    star.style.top = pos.top || 'auto';
+                    star.style.bottom = pos.bottom || 'auto';
+                    star.style.left = pos.left || 'auto';
+                    star.style.right = pos.right || 'auto';
+                    star.style.animationDelay = pos.delay;
+                    modalCard.appendChild(star);
+                    return star;
+                });
+
+                jackpotCleanup = () => {
+                    banner.remove();
+                    rays.remove();
+                    stars.forEach(s => s.remove());
+                };
+
+                playJackpotAnimation();
+            } else {
+                // Обычный режим
+                modalCard.classList.remove('jackpot');
+                modalEmoji.classList.remove('jackpot-emoji');
+                sellWarning.classList.remove('jackpot-bonus');
+                sellWarning.textContent = '⚠️ Скупщик даёт только 25%';
+                modalSellBtn.classList.remove('jackpot');
+                jackpotCleanup = null;
+            }
 
             modal.classList.add('show');
         }
@@ -1231,6 +1554,10 @@
         function hideModal() {
             modal.classList.remove('show');
             currentCar = null;
+            if (jackpotCleanup) {
+                jackpotCleanup();
+                jackpotCleanup = null;
+            }
         }
 
         function getRandomCar(cars) {
@@ -1271,7 +1598,7 @@
 
             checkDropAchievements(carCopy);
             showCarModal(carCopy);
-            vibrate(15);
+            if (!isJackpotCar(carCopy)) vibrate(15);
             scheduleSave(200);
 
             setTimeout(() => { isProcessing = false; }, 200);
@@ -1312,13 +1639,14 @@
 
         function sellCar() {
             if (!currentCar) return;
-            const sellPrice = Math.floor(currentCar.price * SELL_RATE);
+            const sellPrice = getSellPrice(currentCar);
             balance += sellPrice;
             updateBalance();
             addLog(currentCar, 'sell');
+            const wasJackpot = isJackpotCar(currentCar);
             hideModal();
             checkStateAchievements();
-            vibrate(10);
+            vibrate(wasJackpot ? [30, 30, 30] : 10);
             saveProgress();
         }
 
@@ -1350,8 +1678,10 @@
             const fragment = document.createDocumentFragment();
 
             sorted.forEach(car => {
+                const isJackpot = isJackpotCar(car);
                 const item = document.createElement('div');
                 item.className = 'garage-item ' + car.rarity;
+                if (isJackpot) item.classList.add('jackpot');
 
                 const emoji = document.createElement('div');
                 emoji.className = 'garage-item-emoji';
@@ -1362,7 +1692,7 @@
 
                 const name = document.createElement('div');
                 name.className = 'garage-item-name';
-                name.textContent = car.name;
+                name.textContent = (isJackpot ? '🎰 ' : '') + car.name;
 
                 const price = document.createElement('div');
                 price.className = 'garage-item-price';
@@ -1371,10 +1701,12 @@
                 info.appendChild(name);
                 info.appendChild(price);
 
-                const sellPrice = Math.floor(car.price * SELL_RATE);
+                const sellPrice = getSellPrice(car);
+                const sellPct = isJackpot ? '100%' : '25%';
                 const sellBtn = document.createElement('button');
                 sellBtn.className = 'garage-item-sell';
-                sellBtn.innerHTML = `💸 +${fmt(sellPrice)} $<span class="sellpct">25%</span>`;
+                if (isJackpot) sellBtn.classList.add('jackpot');
+                sellBtn.innerHTML = `💸 +${fmt(sellPrice)} $<span class="sellpct">${sellPct}</span>`;
                 sellBtn.addEventListener('click', () => {
                     balance += sellPrice;
                     updateBalance();
@@ -1383,7 +1715,7 @@
                     addLog(car, 'sell');
                     renderGarage();
                     checkStateAchievements();
-                    vibrate(10);
+                    vibrate(isJackpot ? [30, 30, 30] : 10);
                     saveProgress();
                 });
 
@@ -1470,7 +1802,7 @@
 
             vibrate(8);
             checkStateAchievements();
-            scheduleSave(1500); // отложенное сохранение, чтобы не писать на каждый тап
+            scheduleSave(1500);
 
             setTimeout(() => { tapLocked = false; }, 30);
         }
@@ -1514,7 +1846,6 @@
         document.addEventListener('gesturestart', (e) => e.preventDefault());
         document.addEventListener('dblclick', (e) => e.preventDefault(), { passive: false });
 
-        // Сохраняем при уходе со страницы / сворачивании
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden') {
                 saveProgress();
@@ -1524,7 +1855,6 @@
         window.addEventListener('pagehide', saveProgress);
         window.addEventListener('beforeunload', saveProgress);
 
-        // Сохраняем каждые 30 секунд на всякий случай
         setInterval(saveProgress, 30000);
 
         // ================== ИНИЦИАЛИЗАЦИЯ ==================
@@ -1534,11 +1864,9 @@
         updateGarageCount();
         updateAchCounter();
 
-        // Очищаем лог перед инициализацией
         logContainer.innerHTML = '';
 
         if (loaded) {
-            // Приветствие для вернувшегося игрока
             const welcomeItem = document.createElement('div');
             welcomeItem.className = 'log-item achievement';
             welcomeItem.innerHTML = `<span class="name">💾 Прогресс загружен! Баланс: ${fmt(balance)} $</span>`;
@@ -1556,7 +1884,6 @@
             hintItem.innerHTML = `<span class="name">👆 Продолжай тапать!</span>`;
             logContainer.appendChild(hintItem);
         } else {
-            // Первая игра
             const initLog = document.createElement('div');
             initLog.className = 'log-item';
             initLog.innerHTML = '<span class="name">Тапай 👆 (+1$) и открывай контейнеры!</span>';
@@ -1568,7 +1895,6 @@
             logContainer.appendChild(hintLog);
         }
 
-        // Сохраняем при первом запуске, чтобы инициализировать ключ
         if (!loaded) {
             saveProgress();
         }
